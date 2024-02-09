@@ -146,7 +146,7 @@ class Home extends StatelessWidget {
                       children: [
                         Upcoming(
                             time: '3 Hr',
-                            Difficulty: 'Difficulty : Easy',
+                            Difficulty: 'Difficulty : Hard',
                             discription:
                                 'Make a page display about services for websites company with blue and red colors'),
                         SizedBox(width: 5),
@@ -158,7 +158,7 @@ class Home extends StatelessWidget {
                         SizedBox(width: 5),
                         Upcoming(
                             time: '3 Hr',
-                            Difficulty: 'Difficulty : Easy',
+                            Difficulty: 'Difficulty : Medium',
                             discription:
                                 'Make a page display about services for websites company with blue and red colors'),
                         SizedBox(width: 5),
