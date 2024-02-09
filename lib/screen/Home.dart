@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_design/component/Task.dart';
 import 'package:ui_design/component/Upcoming.dart';
 import 'package:ui_design/component/notification.dart';
-import 'package:ui_design/screen/Dis.dart';
+import 'package:ui_design/screen/Nextpage.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
