@@ -39,47 +39,110 @@ class Dis extends StatelessWidget {
                           'Make a page display about services for websites company with blue and red colors'),
                 ),
                 SizedBox(height: 5),
-                Upcoming(
-                    time: '5 Hr',
-                    Difficulty: 'Difficulty : Easy',
-                    discription:
-                        'Make a page display about services for websites company with blue and red colors'),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Detail(),
+                      ),
+                    );
+                  },
+                  child: Upcoming(
+                      time: '5 Hr',
+                      Difficulty: 'Difficulty : Easy',
+                      discription:
+                          'Make a page display about services for websites company with blue and red colors'),
+                ),
                 SizedBox(height: 5),
-                Upcoming(
-                    time: '8 Hr',
-                    Difficulty: 'Difficulty : Easy',
-                    discription:
-                        'Make a page display about services for websites company with blue and red colors'),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Detail(),
+                      ),
+                    );
+                  },
+                  child: Upcoming(
+                      time: '8 Hr',
+                      Difficulty: 'Difficulty : Easy',
+                      discription:
+                          'Make a page display about services for websites company with blue and red colors'),
+                ),
                 SizedBox(height: 5),
-                Upcoming(
-                    time: '2 Hr',
-                    Difficulty: 'Difficulty : Easy',
-                    discription:
-                        'Make a page display about services for websites company with blue and red colors'),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Detail(),
+                      ),
+                    );
+                  },
+                  child: Upcoming(
+                      time: '2 Hr',
+                      Difficulty: 'Difficulty : Easy',
+                      discription:
+                          'Make a page display about services for websites company with blue and red colors'),
+                ),
                 SizedBox(height: 5),
-                Upcoming(
-                    time: '6 Hr',
-                    Difficulty: 'Difficulty : Easy',
-                    discription:
-                        'Make a page display about services for websites company with blue and red colors'),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Detail(),
+                      ),
+                    );
+                  },
+                  child: Upcoming(
+                      time: '6 Hr',
+                      Difficulty: 'Difficulty : Easy',
+                      discription:
+                          'Make a page display about services for websites company with blue and red colors'),
+                ),
                 SizedBox(height: 5),
-                Upcoming(
-                    time: '10 Hr',
-                    Difficulty: 'Difficulty : Easy',
-                    discription:
-                        'Make a page display about services for websites company with blue and red colors'),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Detail(),
+                      ),
+                    );
+                  },
+                  child: Upcoming(
+                      time: '10 Hr',
+                      Difficulty: 'Difficulty : Easy',
+                      discription:
+                          'Make a page display about services for websites company with blue and red colors'),
+                ),
                 SizedBox(height: 5),
-                Upcoming(
-                    time: '4 Hr',
-                    Difficulty: 'Difficulty : Easy',
-                    discription:
-                        'Make a page display about services for websites company with blue and red colors'),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Detail(),
+                      ),
+                    );
+                  },
+                  child: Upcoming(
+                      time: '4 Hr',
+                      Difficulty: 'Difficulty : Easy',
+                      discription:
+                          'Make a page display about services for websites company with blue and red colors'),
+                ),
                 SizedBox(height: 5),
-                Upcoming(
-                    time: '7 Hr',
-                    Difficulty: 'Difficulty : Easy',
-                    discription:
-                        'Make a page display about services for websites company with blue and red colors'),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Detail(),
+                      ),
+                    );
+                  },
+                  child: Upcoming(
+                      time: '7 Hr',
+                      Difficulty: 'Difficulty : Easy',
+                      discription:
+                          'Make a page display about services for websites company with blue and red colors'),
+                ),
                 SizedBox(height: 5),
               ],
             ),
