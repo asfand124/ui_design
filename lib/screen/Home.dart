@@ -4,6 +4,7 @@ import 'package:ui_design/component/Task.dart';
 import 'package:ui_design/component/Upcoming.dart';
 import 'package:ui_design/component/notification.dart';
 import 'package:ui_design/screen/Nextpage.dart';
+import 'package:ui_design/screen/Profile.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -175,6 +176,47 @@ class Home extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        height: 60,
+        decoration: BoxDecoration(
+          color: Color(0xff0047AB),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Home(),
+                  ),
+                );
+              },
+              child: Icon(
+                Icons.home,
+                color: Colors.white,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Profile(),
+                  ),
+                );
+              },
+              child: Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
       ),
     );
