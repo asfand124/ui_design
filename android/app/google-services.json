@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "943311054598",
+    "project_id": "asfandui",
+    "storage_bucket": "asfandui.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943311054598:android:9d9c70ec0630c6e3f32087",
+        "android_client_info": {
+          "package_name": "com.example.ui_design"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7wfP_KMKEWKL2Go4yFegLUTjMEkLVnbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
