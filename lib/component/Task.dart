@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ui_design/screen/Home.dart';
+import 'package:ui_design/screen/Login.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class Task extends StatelessWidget {
   final start;
@@ -7,13 +10,14 @@ class Task extends StatelessWidget {
   final month;
   final year;
   final endtime;
-  const Task(
-      {super.key,
-      required this.start,
-      required this.date,
-      required this.month,
-      required this.year,
-      required this.endtime});
+  const Task({
+    super.key,
+    required this.start,
+    required this.date,
+    required this.month,
+    required this.year,
+    required this.endtime,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +130,104 @@ class Task extends StatelessWidget {
             ),
             Center(
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SingleChildScrollView(
+                          child: SafeArea(
+                            child: Container(
+                              height: 700,
+                              color: Color.fromARGB(255, 255, 247, 251),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  const TextField(
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        hintText: 'Name',
+                                        labelText: "Commit Name"),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  TextField(
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        hintText: '0',
+                                        labelText: "No Of API Calls"),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  TextField(
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        hintText: '0',
+                                        labelText: "No Of Maps"),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  TextField(
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        hintText: '0',
+                                        labelText: "No Of Charts"),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  TextField(
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        hintText: '0',
+                                        labelText: "No Of Conditions"),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text("IS Responsive?"),
+                                      ToggleSwitch(
+                                        minWidth: 70.0,
+                                        cornerRadius: 20.0,
+                                        activeBgColors: [
+                                          [Colors.green[800]!],
+                                          [Colors.red[800]!]
+                                        ],
+                                        activeFgColor: Colors.white,
+                                        inactiveBgColor: Colors.grey,
+                                        inactiveFgColor: Colors.white,
+                                        initialLabelIndex: 1,
+                                        totalSwitches: 2,
+                                        labels: ['True', 'False'],
+                                        radiusStyle: true,
+                                        onToggle: (index) {
+                                          print('switched to: $index');
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  ElevatedButton(
+                                    child: const Text('Submit'),
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xff349EFF),
                     minimumSize: Size(270, 60),

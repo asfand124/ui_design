@@ -47,10 +47,21 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-            child: Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("data"),
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back,
+          ),
+        ),
+      ),
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               decoration: InputDecoration(
@@ -59,6 +70,9 @@ class _LoginState extends State<Login> {
               ),
               controller: _email,
             ),
+            SizedBox(
+              height: 30,
+            ),
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -66,13 +80,16 @@ class _LoginState extends State<Login> {
               ),
               controller: _pass,
             ),
+            SizedBox(
+              height: 30,
+            ),
             ElevatedButton(
               onPressed: Signin,
               child: Text("Login"),
             ),
             // ElevatedButton(onPressed: Signup, child: Text("signup"))
           ],
-        )),
+        ),
       ),
     );
   }
