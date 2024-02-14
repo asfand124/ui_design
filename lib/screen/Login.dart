@@ -20,41 +20,26 @@ class _LoginState extends State<Login> {
     // checkuser();
   }
 
-  NavigateUser(String title) {
-    switch (title) {
-      case "user":
-        {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: ((context) => Home())));
-          break;
-        }
-      case "admin":
-        {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: ((context) => Home())));
-          break;
-        }
+  checkuser() async {
+    if (FirebaseAuth.instance.currentUser != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.push(
+          context as BuildContext,
+          MaterialPageRoute(builder: (context) => const Home()),
+        );
+      });
     }
   }
-
-  // checkuser() async {
-  //   if (FirebaseAuth.instance.currentUser != null) {
-  //     WidgetsBinding.instance.addPostFrameCallback((_) {
-  //       // Navigator.push(
-  //       //   context as BuildContext,
-  //       //   MaterialPageRoute(builder: (context) => const Home()),
-  //       // );
-  //     });
-  //   }
-  // }
 
   Signin() async {
     try {
       FirebaseAuth.instance
           .signInWithEmailAndPassword(email: _email.text, password: _pass.text)
-          .then((res) {
-        // print(res.user?.uid);
-        getUserType(res.user?.uid);
+          .then((value) {
+        Navigator.push(
+          context as BuildContext,
+          MaterialPageRoute(builder: (context) => const Home()),
+        );
       });
     } catch (e) {
       print(e);

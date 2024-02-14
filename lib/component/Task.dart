@@ -4,7 +4,7 @@ import 'package:ui_design/screen/Home.dart';
 import 'package:ui_design/screen/Login.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-class Task extends StatelessWidget {
+class Task extends StatefulWidget {
   final start;
   final date;
   final month;
@@ -18,6 +18,16 @@ class Task extends StatelessWidget {
     required this.year,
     required this.endtime,
   });
+
+  @override
+  State<Task> createState() => _TaskState();
+}
+
+class _TaskState extends State<Task> {
+  int noofmaps = 0;
+  int noofapicall = 0;
+  int noofcharts = 0;
+  int noofcondition = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +76,7 @@ class Task extends StatelessWidget {
                       color: Colors.grey),
                 ),
                 Text(
-                  start,
+                  widget.start,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -77,7 +87,7 @@ class Task extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  date,
+                  widget.date,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -85,7 +95,7 @@ class Task extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  month,
+                  widget.month,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -93,7 +103,7 @@ class Task extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  year,
+                  widget.year,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -115,7 +125,7 @@ class Task extends StatelessWidget {
                         color: Colors.grey),
                   ),
                   Text(
-                    endtime,
+                    widget.endtime,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -134,96 +144,237 @@ class Task extends StatelessWidget {
                     showModalBottomSheet<void>(
                       context: context,
                       builder: (BuildContext context) {
-                        return SingleChildScrollView(
-                          child: SafeArea(
-                            child: Container(
-                              height: 700,
-                              color: Color.fromARGB(255, 255, 247, 251),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  const TextField(
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        hintText: 'Name',
-                                        labelText: "Commit Name"),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  TextField(
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        hintText: '0',
-                                        labelText: "No Of API Calls"),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  TextField(
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        hintText: '0',
-                                        labelText: "No Of Maps"),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  TextField(
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        hintText: '0',
-                                        labelText: "No Of Charts"),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  TextField(
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        hintText: '0',
-                                        labelText: "No Of Conditions"),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text("IS Responsive?"),
-                                      ToggleSwitch(
-                                        minWidth: 70.0,
-                                        cornerRadius: 20.0,
-                                        activeBgColors: [
-                                          [Colors.green[800]!],
-                                          [Colors.red[800]!]
+                        return StatefulBuilder(
+                          builder: (BuildContext context,
+                              StateSetter setState /*You can rename this!*/) {
+                            return SingleChildScrollView(
+                              child: SafeArea(
+                                child: Container(
+                                  height: 700,
+                                  color: Color.fromARGB(255, 255, 247, 251),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      const TextField(
+                                        decoration: InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            hintText: 'Name',
+                                            labelText: "Commit Name"),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text("Number Of APIS Calls"),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          IconButton(
+                                            iconSize: 40,
+                                            color: Colors.red,
+                                            onPressed: () {
+                                              setState(() {
+                                                noofapicall--;
+                                              });
+                                            },
+                                            icon: Icon(Icons.exposure_minus_1),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(),
+                                            child: Text(
+                                              "$noofapicall",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 25,
+                                              ),
+                                            ),
+                                          ),
+                                          IconButton(
+                                            iconSize: 40,
+                                            color: Colors.green,
+                                            onPressed: () {
+                                              setState(() {
+                                                noofapicall++;
+                                              });
+                                            },
+                                            icon: Icon(Icons.plus_one),
+                                          ),
                                         ],
-                                        activeFgColor: Colors.white,
-                                        inactiveBgColor: Colors.grey,
-                                        inactiveFgColor: Colors.white,
-                                        initialLabelIndex: 1,
-                                        totalSwitches: 2,
-                                        labels: ['True', 'False'],
-                                        radiusStyle: true,
-                                        onToggle: (index) {
-                                          print('switched to: $index');
-                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text("Number Of Maps"),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          IconButton(
+                                            iconSize: 40,
+                                            color: Colors.red,
+                                            onPressed: () {
+                                              setState(() {
+                                                noofmaps--;
+                                              });
+                                            },
+                                            icon: Icon(Icons.exposure_minus_1),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(),
+                                            child: Text(
+                                              "$noofmaps",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 25,
+                                              ),
+                                            ),
+                                          ),
+                                          IconButton(
+                                            iconSize: 40,
+                                            color: Colors.green,
+                                            onPressed: () {
+                                              setState(() {
+                                                noofmaps++;
+                                              });
+                                            },
+                                            icon: Icon(Icons.plus_one),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text("Number Of Charts"),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          IconButton(
+                                            iconSize: 40,
+                                            color: Colors.red,
+                                            onPressed: () {
+                                              setState(() {
+                                                noofcharts--;
+                                              });
+                                            },
+                                            icon: Icon(Icons.exposure_minus_1),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(),
+                                            child: Text(
+                                              "$noofcharts",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 25,
+                                              ),
+                                            ),
+                                          ),
+                                          IconButton(
+                                            iconSize: 40,
+                                            color: Colors.green,
+                                            onPressed: () {
+                                              setState(() {
+                                                noofcharts++;
+                                              });
+                                            },
+                                            icon: Icon(Icons.plus_one),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text("Number Of Conditions"),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          IconButton(
+                                            iconSize: 40,
+                                            color: Colors.red,
+                                            onPressed: () {
+                                              setState(() {
+                                                noofcondition--;
+                                              });
+                                            },
+                                            icon: Icon(Icons.exposure_minus_1),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(),
+                                            child: Text(
+                                              "$noofcondition",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 25,
+                                              ),
+                                            ),
+                                          ),
+                                          IconButton(
+                                            iconSize: 40,
+                                            color: Colors.green,
+                                            onPressed: () {
+                                              setState(() {
+                                                noofcondition++;
+                                              });
+                                            },
+                                            icon: Icon(Icons.plus_one),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text("IS Responsive?"),
+                                          ToggleSwitch(
+                                            minWidth: 70.0,
+                                            cornerRadius: 20.0,
+                                            activeBgColors: [
+                                              [Colors.green[800]!],
+                                              [Colors.red[800]!]
+                                            ],
+                                            activeFgColor: Colors.white,
+                                            inactiveBgColor: Colors.grey,
+                                            inactiveFgColor: Colors.white,
+                                            initialLabelIndex: 1,
+                                            totalSwitches: 2,
+                                            labels: ['True', 'False'],
+                                            radiusStyle: true,
+                                            onToggle: (index) {
+                                              print('switched to: $index');
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      ElevatedButton(
+                                        child: const Text('Submit'),
+                                        onPressed: () => Navigator.pop(context),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  ElevatedButton(
-                                    child: const Text('Submit'),
-                                    onPressed: () => Navigator.pop(context),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         );
                       },
                     );
