@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ui_design/screen/Home.dart';
+// import 'package:ui_design/screen/Home.dart';
 import 'package:ui_design/screen/Signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ui_design/screen/admin/AdminHome.dart';
+import 'package:ui_design/screen/user/Home.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
