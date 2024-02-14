@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_design/component/Task.dart';
@@ -6,9 +7,62 @@ import 'package:ui_design/component/notification.dart';
 import 'package:ui_design/screen/user/Nextpage.dart';
 import 'package:ui_design/screen/user/Profile.dart';
 import 'package:ui_design/screen/user/wallet.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  Map<String, dynamic> userDetails = {};
+  Map<String, dynamic> activeTask = {};
+  bool isTaskActive = true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUserDetail();
+  }
+
+  getUserDetail() async {
+    print("object");
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+
+    await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(userId)
+        .get()
+        .then((response) {
+      setState(() {
+        userDetails = response.data()!;
+      });
+      print(response.data());
+      if (response.data()!['activeTask'] != null ||
+          response.data()!['activeTask'] != "") {
+        print('ppp');
+        print(response.data()!['activeTask']);
+        getAtiveTask(response.data()!['activeTask']);
+      }
+    });
+  }
+
+  getAtiveTask(id) async {
+    await FirebaseFirestore.instance
+        .collection("Tasks")
+        .doc(id)
+        .get()
+        .then((response) {
+      setState(() {
+        activeTask = {...response.data()!, "id": response.id};
+        // activeTask[id] = response.id;
+      });
+    });
+    print(activeTask);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +93,7 @@ class Home extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Hi, Huzaifa Tawab',
+                              'Hi, ${userDetails['Name']}',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
@@ -72,12 +126,16 @@ class Home extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Task(
-                    start: '10:50 AM',
-                    date: '20',
-                    month: ' may',
-                    year: ' 2020',
-                    endtime: '2:50:00'),
+                isTaskActive
+                    ? Task(
+                        start: activeTask['Title'],
+                        date: activeTask['id'],
+                        month: (activeTask['assignedAt'] as Timestamp).toDate(),
+                        year: ' 2020',
+                        endtime: '2:50:00')
+                    : Center(
+                        child: Text("No Active task"),
+                      ),
                 SizedBox(
                   height: 20,
                 ),

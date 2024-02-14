@@ -87,7 +87,7 @@ class _TaskState extends State<Task> {
                   width: 10,
                 ),
                 Text(
-                  widget.date,
+                  "${widget.date}",
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -95,7 +95,7 @@ class _TaskState extends State<Task> {
                   ),
                 ),
                 Text(
-                  widget.month,
+                  widget.month.toString(),
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
