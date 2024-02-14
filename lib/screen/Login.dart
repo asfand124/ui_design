@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_design/screen/Home.dart';
 import 'package:ui_design/screen/Signup.dart';
+import 'package:ui_design/screen/admin/AdminHome.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -24,7 +25,7 @@ class _LoginState extends State<Login> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.push(
           context as BuildContext,
-          MaterialPageRoute(builder: (context) => const Home()),
+          MaterialPageRoute(builder: (context) => const AdminHome()),
         );
       });
     }
@@ -37,7 +38,7 @@ class _LoginState extends State<Login> {
           .then((value) {
         Navigator.push(
           context as BuildContext,
-          MaterialPageRoute(builder: (context) => const Home()),
+          MaterialPageRoute(builder: (context) => const AdminHome()),
         );
       });
     } catch (e) {
