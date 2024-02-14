@@ -5,6 +5,7 @@ import 'package:ui_design/component/Upcoming.dart';
 import 'package:ui_design/component/notification.dart';
 import 'package:ui_design/screen/Nextpage.dart';
 import 'package:ui_design/screen/Profile.dart';
+import 'package:ui_design/screen/user/wallet.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -213,6 +214,19 @@ class Home extends StatelessWidget {
               },
               child: Icon(
                 Icons.person,
+                color: Colors.white,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Wallet(),
+                  ),
+                );
+              },
+              child: Icon(
+                Icons.wallet,
                 color: Colors.white,
               ),
             ),
