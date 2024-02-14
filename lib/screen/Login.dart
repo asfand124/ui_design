@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ui_design/screen/Home.dart';
 import 'package:ui_design/screen/Signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ui_design/screen/admin/AdminHome.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -20,14 +21,21 @@ class _LoginState extends State<Login> {
     // checkuser();
   }
 
-  checkuser() async {
-    if (FirebaseAuth.instance.currentUser != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.push(
-          context as BuildContext,
-          MaterialPageRoute(builder: (context) => const Home()),
-        );
-      });
+  NavigateUser(String title) {
+    switch (title) {
+      case "user":
+        {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: ((context) => Home())));
+          break;
+        }
+
+      case "admin":
+        {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: ((context) => AdminHome())));
+          break;
+        }
     }
   }
 
@@ -35,11 +43,8 @@ class _LoginState extends State<Login> {
     try {
       FirebaseAuth.instance
           .signInWithEmailAndPassword(email: _email.text, password: _pass.text)
-          .then((value) {
-        Navigator.push(
-          context as BuildContext,
-          MaterialPageRoute(builder: (context) => const Home()),
-        );
+          .then((res) {
+        getUserType(res.user?.uid);
       });
     } catch (e) {
       print(e);
