@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_design/component/Task.dart';
-import 'package:ui_design/screen/Detail.dart';
-import 'package:ui_design/screen/Nextpage.dart';
+import 'package:ui_design/screen/user/Detail.dart';
+import 'package:ui_design/screen/user/Nextpage.dart';
 
 class Upcoming extends StatelessWidget {
   final time;

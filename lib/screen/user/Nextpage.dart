@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui_design/component/Upcoming.dart';
-import 'package:ui_design/screen/Detail.dart';
+import 'package:ui_design/screen/user/Detail.dart';
 
 class Dis extends StatelessWidget {
   const Dis({super.key});
