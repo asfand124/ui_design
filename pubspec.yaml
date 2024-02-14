@@ -10,6 +10,7 @@ dependencies:
   dart_jts: ^0.3.0+1
   firebase_auth: ^4.17.4
   firebase_core: ^2.25.4
+  cloud_firestore: ^4.15.4 
   flutter:
     sdk: flutter
   google_fonts: ^6.1.0
