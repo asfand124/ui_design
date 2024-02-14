@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ui_design/screen/Home.dart';
+import 'package:ui_design/screen/user/Home.dart';
 import 'package:ui_design/screen/Login.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
