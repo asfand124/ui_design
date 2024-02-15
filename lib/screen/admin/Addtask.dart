@@ -40,7 +40,7 @@ class _AddTaskState extends State<AddTask> {
 
   addTaskHandler() {
     try {
-      FirebaseFirestore.instance.collection("Tasks").doc().set({
+      FirebaseFirestore.instance.collection("Tasks").add({
         "Title": titleController.text,
         "Desc": descrController.text,
         "frameWork": frameworkValue,
@@ -51,6 +51,7 @@ class _AddTaskState extends State<AddTask> {
         "appliedForApproval": false,
         "defaulted": false,
         "paid": false,
+        "assignedTo": null
       }).then((value) {
         Navigator.push(
             context, MaterialPageRoute(builder: ((context) => AdminHome())));

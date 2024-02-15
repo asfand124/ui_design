@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ui_design/component/Upcoming.dart';
+import 'package:ui_design/logics/User.dart';
 
-class Detail extends StatelessWidget {
-  const Detail({super.key});
-
+class TaskDetail extends StatelessWidget {
+  final Map<String, dynamic> taskDetails;
+  const TaskDetail({super.key, required this.taskDetails});
   @override
   Widget build(BuildContext context) {
+    startTask() {
+      if (getUserCurrentTaskId() == "") {
+        // submit some this
+        print("Asign task : ${taskDetails['id']}");
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('You Already Have A Task Running'),
+        ));
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -17,7 +28,7 @@ class Detail extends StatelessWidget {
             Icons.arrow_back,
           ),
         ),
-        title: Text('Login screen'),
+        title: Text("${taskDetails["Title"]}"),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
@@ -35,7 +46,7 @@ class Detail extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                  'Most apps contain several screens for displaying different types of information. For example, an app might have a screen that displays products. When the user taps the image of a product, a new screen displays details about the product.Most apps contain several screens for displaying different types of information. For example, an app might have a screen that displays products. When the user taps the image of a product, a new screen displays details about the product.\nMost apps contain several screens for displaying different types of information. For example, an app might have a screen that displays products. When the user taps the image of a product, a new screen displays details about the product.'),
+                  'Most apps contain several screens for displaying different types of information. For example, an app might have a screen that displays products. When the user taps the image of a product, a new screen displays Taskdetails about the product.Most apps contain several screens for displaying different types of information. For example, an app might have a screen that displays products. When the user taps the image of a product, a new screen displays Taskdetails about the product.\nMost apps contain several screens for displaying different types of information. For example, an app might have a screen that displays products. When the user taps the image of a product, a new screen displays Taskdetails about the product.'),
               SizedBox(
                 height: 20,
               ),
@@ -101,7 +112,7 @@ class Detail extends StatelessWidget {
               ),
               Center(
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: startTask,
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xff349EFF),
                         minimumSize: Size(120, 50),
