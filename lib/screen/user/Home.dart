@@ -19,7 +19,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   Map<String, dynamic> userDetails = {};
   Map<String, dynamic> activeTask = {};
-  bool isTaskActive = true;
+  bool isTaskActive = false;
 
   @override
   void initState() {
@@ -41,10 +41,11 @@ class _HomeState extends State<Home> {
         userDetails = response.data()!;
       });
       print(response.data());
-      if (response.data()!['activeTask'] != null ||
+      if (response.data()!['activeTask'] != null &&
           response.data()!['activeTask'] != "") {
         print('ppp');
         print(response.data()!['activeTask']);
+
         getAtiveTask(response.data()!['activeTask']);
       }
     });
@@ -59,6 +60,10 @@ class _HomeState extends State<Home> {
       setState(() {
         activeTask = {...response.data()!, "id": response.id};
         // activeTask[id] = response.id;
+        isTaskActive = true;
+        print("===========================");
+        print(response.data()!['assignedAt']);
+        print("===========================");
       });
     });
     print(activeTask);
@@ -128,11 +133,11 @@ class _HomeState extends State<Home> {
                 ),
                 isTaskActive
                     ? Task(
-                        start: activeTask['Title'],
-                        date: activeTask['id'],
-                        month: (activeTask['assignedAt'] as Timestamp).toDate(),
+                        title: activeTask['Title'],
+                        time: activeTask['assignedAt'],
+                        month: "hghg",
                         year: ' 2020',
-                        endtime: '2:50:00')
+                        endtime: activeTask['id'])
                     : Center(
                         child: Text("No Active task"),
                       ),
