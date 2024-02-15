@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Map<String, dynamic> userDetails = {};
+  Map<String, dynamic>  userDetails = {};
   Map<String, dynamic> activeTask = {};
   bool isTaskActive = false;
 
