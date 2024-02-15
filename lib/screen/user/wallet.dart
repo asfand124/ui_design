@@ -46,18 +46,12 @@ tempData.add(element.data());
   }
   
 getUserDetail() async {
-    print("object");
     String userId = FirebaseAuth.instance.currentUser!.uid;
-
     await FirebaseFirestore.instance
         .collection("Users")
         .doc(userId)
         .get()
         .then((response) {
-          print("_______________________________________");
-          print(response.data()!['Credit']);
-          print("_______________________________________");
-
   setState(() {
    Credit= response.data()!['Credit'].toString();
   });
@@ -177,7 +171,7 @@ getUserDetail() async {
               ),
             )
           ],
-        ):Text('loading')
+        ):const Center(child: CircularProgressIndicator(color: Colors.black,))
       ),
       /////////////////////////////////////////////////////////////
       bottomNavigationBar: Container(
