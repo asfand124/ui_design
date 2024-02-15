@@ -19,6 +19,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   Map<String, dynamic> userDetails = {};
   Map<String, dynamic> activeTask = {};
+  List<Map<String, dynamic>> avaliblrTasks = [];
+
   bool isTaskActive = false;
 
   @override
@@ -26,6 +28,7 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     getUserDetail();
+    getAllUpcomingTasks();
   }
 
   getUserDetail() async {
@@ -61,12 +64,23 @@ class _HomeState extends State<Home> {
         activeTask = {...response.data()!, "id": response.id};
         // activeTask[id] = response.id;
         isTaskActive = true;
-        print("===========================");
-        print(response.data()!['assignedAt']);
-        print("===========================");
       });
     });
     print(activeTask);
+  }
+
+  getAllUpcomingTasks() async {
+    await FirebaseFirestore.instance
+        .collection("Tasks")
+        .where("assignedTo", isEqualTo: "")
+        .get()
+        .then((response) {
+      for (var res in response.docs) {
+        setState(() {
+          avaliblrTasks.add(res.data());
+        });
+      }
+    });
   }
 
   @override
@@ -209,30 +223,14 @@ class _HomeState extends State<Home> {
                   child: Container(
                     child: Row(
                       children: [
-                        Upcoming(
-                            time: '3 Hr',
-                            Difficulty: 'Difficulty : Hard',
-                            discription:
-                                'Make a page display about services for websites company with blue and red colors'),
-                        SizedBox(width: 5),
-                        Upcoming(
-                            time: '3 Hr',
-                            Difficulty: 'Difficulty : Easy',
-                            discription:
-                                'Make a page display about services for websites company with blue and red colors'),
-                        SizedBox(width: 5),
-                        Upcoming(
-                            time: '3 Hr',
-                            Difficulty: 'Difficulty : Medium',
-                            discription:
-                                'Make a page display about services for websites company with blue and red colors'),
-                        SizedBox(width: 5),
-                        Upcoming(
-                            time: '3 Hr',
-                            Difficulty: 'Difficulty : Easy',
-                            discription:
-                                'Make a page display about services for websites company with blue and red colors'),
-                        SizedBox(width: 5),
+                        ...avaliblrTasks.map(
+                          (tasks) => Upcoming(
+                              time: "${tasks["alottedTimeInHours"]}",
+                              title: "${tasks["Title"]}",
+                              frameWork: "${tasks["frameWork"]}",
+                              Difficulty: "${tasks["difficulty"]}",
+                              discription: "${tasks["Desc"]}"),
+                        ),
                       ],
                     ),
                   ),

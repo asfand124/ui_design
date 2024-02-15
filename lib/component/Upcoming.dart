@@ -6,11 +6,15 @@ import 'package:ui_design/screen/user/Nextpage.dart';
 
 class Upcoming extends StatelessWidget {
   final time;
+  final title;
   final Difficulty;
+  final frameWork;
   final discription;
   const Upcoming(
       {super.key,
       required this.time,
+      required this.title,
+      required this.frameWork,
       required this.Difficulty,
       required this.discription});
 
@@ -61,12 +65,12 @@ class Upcoming extends StatelessWidget {
                                   backgroundColor: Color(0xffF1F0FE),
                                   minimumSize: Size(120, 35),
                                   elevation: 0),
-                              child: Text('Flutter')),
+                              child: Text("$frameWork")),
                           SizedBox(
                             height: 10,
                           ),
                           Text(
-                            'Login Screen ',
+                            "$title",
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
@@ -76,7 +80,7 @@ class Upcoming extends StatelessWidget {
                           SizedBox(
                             height: 10,
                           ),
-                          Text(discription),
+                          Text("$discription"),
                           SizedBox(
                             height: 10,
                           ),
