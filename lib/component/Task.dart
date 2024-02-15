@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_design/screen/user/Home.dart';
@@ -5,15 +6,15 @@ import 'package:ui_design/screen/Login.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class Task extends StatefulWidget {
-  final start;
-  final date;
+  final title;
+  final time;
   final month;
   final year;
   final endtime;
   const Task({
     super.key,
-    required this.start,
-    required this.date,
+    required this.title,
+    required this.time,
     required this.month,
     required this.year,
     required this.endtime,
@@ -58,7 +59,7 @@ class _TaskState extends State<Task> {
               height: 8,
             ),
             Text(
-              'Flutter UI Design',
+              '${widget.title}',
               style: TextStyle(
                 fontSize: 27,
                 fontWeight: FontWeight.w600,
@@ -68,7 +69,7 @@ class _TaskState extends State<Task> {
             Row(
               children: [
                 Text(
-                  'Started  : ',
+                  'titleed  : ',
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
@@ -76,7 +77,7 @@ class _TaskState extends State<Task> {
                       color: Colors.grey),
                 ),
                 Text(
-                  widget.start,
+                  widget.title,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -87,7 +88,7 @@ class _TaskState extends State<Task> {
                   width: 10,
                 ),
                 Text(
-                  widget.date,
+                  "",
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -95,7 +96,7 @@ class _TaskState extends State<Task> {
                   ),
                 ),
                 Text(
-                  widget.month,
+                  widget.month.toString(),
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -125,7 +126,7 @@ class _TaskState extends State<Task> {
                         color: Colors.grey),
                   ),
                   Text(
-                    widget.endtime,
+                    (widget.endtime),
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
