@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_design/component/Task.dart';
 import 'package:ui_design/component/Upcoming.dart';
 import 'package:ui_design/component/notification.dart';
+import 'package:ui_design/screen/admin/Addtask.dart';
 import 'package:ui_design/screen/user/Nextpage.dart';
 import 'package:ui_design/screen/user/Profile.dart';
 
@@ -117,7 +118,14 @@ class _AdminHomeState extends State<AdminHome> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             ElevatedButton(
-                                onPressed: () {}, child: Text("Add Task"))
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const AddTask()),
+                                  );
+                                },
+                                child: Text("Add Task"))
                           ],
                         ),
                       ],
