@@ -31,7 +31,7 @@ class _ClientDataState extends State<Wallet> {
   getTransactionDetail(){
     String userId= FirebaseAuth.instance.currentUser!.uid;
     FirebaseFirestore.instance.collection("Transection")
-    .where("empID",isEqualTo: userId)
+    .where("empID",isEqualTo: userId)..orderBy('date', descending: true)
     .get().
     then((res) {
       List tempData=[];
