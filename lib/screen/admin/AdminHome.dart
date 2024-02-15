@@ -1,13 +1,43 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_design/component/Task.dart';
 import 'package:ui_design/component/Upcoming.dart';
 import 'package:ui_design/component/notification.dart';
+import 'package:ui_design/screen/admin/Addtask.dart';
 import 'package:ui_design/screen/user/Nextpage.dart';
 import 'package:ui_design/screen/user/Profile.dart';
 
-class AdminHome extends StatelessWidget {
+class AdminHome extends StatefulWidget {
   const AdminHome({super.key});
+
+  @override
+  State<AdminHome> createState() => _AdminHomeState();
+}
+
+class _AdminHomeState extends State<AdminHome> {
+  List<Map<String, dynamic>> avaliblrTasks = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getAllUpcomingTasks();
+  }
+
+  getAllUpcomingTasks() async {
+    await FirebaseFirestore.instance
+        .collection("Tasks")
+        .where("assignedTo", isEqualTo: "")
+        .get()
+        .then((response) {
+      for (var res in response.docs) {
+        setState(() {
+          avaliblrTasks.add(res.data());
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +118,14 @@ class AdminHome extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             ElevatedButton(
-                                onPressed: () {}, child: Text("Add Task"))
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const AddTask()),
+                                  );
+                                },
+                                child: Text("Add Task"))
                           ],
                         ),
                       ],
@@ -164,26 +201,10 @@ class AdminHome extends StatelessWidget {
                     child: Row(
                       children: [
                         Upcoming(
+                            frameWork: "flutter",
+                            title: "LoginScreen",
                             time: '3 Hr',
                             Difficulty: 'Difficulty : Hard',
-                            discription:
-                                'Make a page display about services for websites company with blue and red colors'),
-                        SizedBox(width: 5),
-                        Upcoming(
-                            time: '3 Hr',
-                            Difficulty: 'Difficulty : Easy',
-                            discription:
-                                'Make a page display about services for websites company with blue and red colors'),
-                        SizedBox(width: 5),
-                        Upcoming(
-                            time: '3 Hr',
-                            Difficulty: 'Difficulty : Medium',
-                            discription:
-                                'Make a page display about services for websites company with blue and red colors'),
-                        SizedBox(width: 5),
-                        Upcoming(
-                            time: '3 Hr',
-                            Difficulty: 'Difficulty : Easy',
                             discription:
                                 'Make a page display about services for websites company with blue and red colors'),
                         SizedBox(width: 5),
