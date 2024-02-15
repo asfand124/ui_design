@@ -17,15 +17,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Map<String, dynamic> userDetails = {};
+  Map<String, dynamic>  userDetails = {};
   Map<String, dynamic> activeTask = {};
-  bool isTaskActive = true;
+  List<Map<String, dynamic>> avaliblrTasks = [];
+
+  bool isTaskActive = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getUserDetail();
+    getAllUpcomingTasks();
   }
 
   getUserDetail() async {
@@ -41,10 +44,11 @@ class _HomeState extends State<Home> {
         userDetails = response.data()!;
       });
       print(response.data());
-      if (response.data()!['activeTask'] != null ||
+      if (response.data()!['activeTask'] != null &&
           response.data()!['activeTask'] != "") {
         print('ppp');
         print(response.data()!['activeTask']);
+
         getAtiveTask(response.data()!['activeTask']);
       }
     });
@@ -59,9 +63,24 @@ class _HomeState extends State<Home> {
       setState(() {
         activeTask = {...response.data()!, "id": response.id};
         // activeTask[id] = response.id;
+        isTaskActive = true;
       });
     });
     print(activeTask);
+  }
+
+  getAllUpcomingTasks() async {
+    await FirebaseFirestore.instance
+        .collection("Tasks")
+        .where("assignedTo", isEqualTo: "")
+        .get()
+        .then((response) {
+      for (var res in response.docs) {
+        setState(() {
+          avaliblrTasks.add(res.data());
+        });
+      }
+    });
   }
 
   @override
@@ -128,11 +147,11 @@ class _HomeState extends State<Home> {
                 ),
                 isTaskActive
                     ? Task(
-                        start: activeTask['Title'],
-                        date: activeTask['id'],
-                        month: (activeTask['assignedAt'] as Timestamp).toDate(),
+                        title: activeTask['Title'],
+                        time: activeTask['assignedAt'],
+                        month: "hghg",
                         year: ' 2020',
-                        endtime: '2:50:00')
+                        endtime: activeTask['id'])
                     : Center(
                         child: Text("No Active task"),
                       ),
@@ -204,30 +223,14 @@ class _HomeState extends State<Home> {
                   child: Container(
                     child: Row(
                       children: [
-                        Upcoming(
-                            time: '3 Hr',
-                            Difficulty: 'Difficulty : Hard',
-                            discription:
-                                'Make a page display about services for websites company with blue and red colors'),
-                        SizedBox(width: 5),
-                        Upcoming(
-                            time: '3 Hr',
-                            Difficulty: 'Difficulty : Easy',
-                            discription:
-                                'Make a page display about services for websites company with blue and red colors'),
-                        SizedBox(width: 5),
-                        Upcoming(
-                            time: '3 Hr',
-                            Difficulty: 'Difficulty : Medium',
-                            discription:
-                                'Make a page display about services for websites company with blue and red colors'),
-                        SizedBox(width: 5),
-                        Upcoming(
-                            time: '3 Hr',
-                            Difficulty: 'Difficulty : Easy',
-                            discription:
-                                'Make a page display about services for websites company with blue and red colors'),
-                        SizedBox(width: 5),
+                        ...avaliblrTasks.map(
+                          (tasks) => Upcoming(
+                              time: "${tasks["alottedTimeInHours"]}",
+                              title: "${tasks["Title"]}",
+                              frameWork: "${tasks["frameWork"]}",
+                              Difficulty: "${tasks["difficulty"]}",
+                              discription: "${tasks["Desc"]}"),
+                        ),
                       ],
                     ),
                   ),
