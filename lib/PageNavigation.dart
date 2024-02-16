@@ -35,6 +35,7 @@ class _PageNavigationState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 252, 237, 192),
       
       body: SafeArea(child: _pages[_selectedTab]),
       

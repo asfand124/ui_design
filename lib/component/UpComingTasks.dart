@@ -96,7 +96,7 @@ class UpcomingTasks extends StatelessWidget {
                                       backgroundColor: Color(0xffF1F0FE),
                                       minimumSize: Size(120, 35),
                                       elevation: 0),
-                                  child: Text("frameWork")),
+                                  child: Text("${dataStream[index]["frameWork"]}")),
                               SizedBox(
                                 height: 10,
                               ),
@@ -111,10 +111,10 @@ class UpcomingTasks extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text("discription"),
-                              SizedBox(
-                                height: 10,
-                              ),
+                              // Text("${dataStream[index]["Desc"]}"),
+                              // SizedBox(
+                              //   height: 10,
+                              // ),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -133,7 +133,7 @@ class UpcomingTasks extends StatelessWidget {
                                               BorderRadius.circular(100),
                                         ),
                                         child: Icon(
-                                          Icons.check,
+                                          Icons.timer,
                                           color: Colors.grey,
                                           size: 18,
                                         ),
@@ -142,7 +142,8 @@ class UpcomingTasks extends StatelessWidget {
                                         width: 5,
                                       ),
                                       Text(
-                                        "time",
+                                        "${dataStream[index]["alottedTimeInHours"]} Hrs",
+                                       // "Time",
                                         style: TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w600,
@@ -159,7 +160,7 @@ class UpcomingTasks extends StatelessWidget {
                                           minimumSize: Size(120, 30),
                                           elevation: 0),
                                       child: Text(
-                                        "Difficulty",
+                                        "${dataStream[index]["difficulty"]}",
                                         style: TextStyle(
                                             fontSize: 10,
                                             fontWeight: FontWeight.w400,
@@ -170,7 +171,7 @@ class UpcomingTasks extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 20,
                               ),
                               Padding(
                                 padding:
@@ -188,35 +189,59 @@ class UpcomingTasks extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 10, right: 10),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.apple,
-                                          size: 16,
-                                        ),
-                                        Text(
-                                          '4 Attachment',
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily:
-                                                GoogleFonts.inter().fontFamily,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 4,
-                                        ),
+                                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [                                       
+                                        Column(
+                                          children: [  
+                                            Text(
+                                              'Leader',
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily:
+                                                    GoogleFonts.inter().fontFamily,
+                                              ),
+                                            ),                                          
+                                            Text(
+                                              '${dataStream[index]["leadedBy"]}',
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily:
+                                                    GoogleFonts.inter().fontFamily,
+                                              ),
+                                            ),
+                                          ],
+                                        ),                                       
                                         Container(
                                           height: 20,
-                                          width: 0.5,
+                                          width: 1,
                                           color: Colors.black,
                                         ),
                                         SizedBox(
                                           width: 4,
                                         ),
-                                        Icon(
-                                          Icons.message,
-                                          size: 16,
+                                        Column(
+                                          children: [ 
+                                            Text(
+                                              'project',
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily:
+                                                    GoogleFonts.inter().fontFamily,
+                                              ),
+                                            ),                                           
+                                                Text(
+                                              '${dataStream[index]["belongsTo"]}',
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily:
+                                                    GoogleFonts.inter().fontFamily,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),

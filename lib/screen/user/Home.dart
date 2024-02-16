@@ -142,7 +142,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
               //-------------------component----------------------------
-             
+             SizedBox(height: 10,),
               isTaskActive
                   ? Task(
                       title: activeTask['Title'],

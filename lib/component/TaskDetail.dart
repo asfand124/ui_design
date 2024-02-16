@@ -28,7 +28,8 @@ class TaskDetail extends StatelessWidget {
             Icons.arrow_back,
           ),
         ),
-        title: Text("${taskDetails["Title"]}"),
+        title: Text("${taskDetails["Title"]}",
+        style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
@@ -36,77 +37,80 @@ class TaskDetail extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Text(
-                  'Disprection',
-                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
-                ),
+              Text(
+                'Discription',
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Text(
-                  'Most apps contain several screens for displaying different types of information. For example, an app might have a screen that displays products. When the user taps the image of a product, a new screen displays Taskdetails about the product.Most apps contain several screens for displaying different types of information. For example, an app might have a screen that displays products. When the user taps the image of a product, a new screen displays Taskdetails about the product.\nMost apps contain several screens for displaying different types of information. For example, an app might have a screen that displays products. When the user taps the image of a product, a new screen displays Taskdetails about the product.'),
-              SizedBox(
-                height: 20,
+                '${taskDetails['Desc']}'
+              ),
+                      SizedBox(
+                height: 10,
               ),
               Text(
                 'Time for task',
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
               ),
-              Row(
-                children: [
-                  Container(
-                    height: 25,
-                    width: 25,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.black,
-                      ),
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: Icon(
-                      Icons.check,
-                      color: Colors.grey,
-                      size: 18,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    '3 Hr',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: GoogleFonts.inter().fontFamily,
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(
-                height: 20,
+                width: 5,
               ),
               Text(
-                'Difficulty',
+                '${taskDetails['alottedTimeInHours']} Hr',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: GoogleFonts.inter().fontFamily,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'State',
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
               ),
               Text(
-                "Eassy",
+                '${taskDetails['difficulty']}',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontFamily: GoogleFonts.inter().fontFamily,
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Text(
-                'Tools',
+                'Frame Work',
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
               ),
-              Text('APIS calling'),
+              Text('${taskDetails['frameWork']}'),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Project',
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+              ),
+              Text('${taskDetails['belongsTo']}'),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Leader',
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+              ),
+              Text('${taskDetails['leadedBy']}'),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Createed At',
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+              ),
+              Text('${taskDetails['createdAt'].toDate()}'),
               SizedBox(
                 height: 20,
               ),
