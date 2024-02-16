@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ui_design/component/Upcoming.dart';
-import 'package:ui_design/screen/user/Detail.dart';
+
+import 'package:ui_design/component/TaskDetail.dart';
 
 class Dis extends StatelessWidget {
   const Dis({super.key});
@@ -25,23 +25,14 @@ class Dis extends StatelessWidget {
             child: Column(
               children: [
                 InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => Detail(),
-                      ),
-                    );
-                  },
-                  child: Upcoming(
-                      frameWork: "flutter",
-                      title: "LoginPage",
-                      time: '3 Hr',
-                      Difficulty: 'Difficulty : Easy',
-                      discription:
-                          'Make a page display about services for websites company with blue and red colors'),
-                ),
-                SizedBox(height: 5),
-                SizedBox(height: 5),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => TaskDetail(taskDetails: {}),
+                        ),
+                      );
+                    },
+                    child: Text('redo this page'))
               ],
             ),
           ),

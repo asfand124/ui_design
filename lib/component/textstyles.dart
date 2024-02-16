@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 txt15700(){
   return const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w500,
                                   color: Colors.white);
 }
 txt20700(){

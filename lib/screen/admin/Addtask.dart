@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_design/screen/admin/AdminHome.dart';
 
 const List<String> framework = <String>[
   'Flutter',
@@ -32,7 +34,33 @@ class _AddTaskState extends State<AddTask> {
   String leadbyValue = framework.first;
   String belongtoValue = framework.first;
 
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descrController = TextEditingController();
   int nooftime = 0;
+
+  addTaskHandler() {
+    try {
+      FirebaseFirestore.instance.collection("Tasks").add({
+        "Title": titleController.text,
+        "Desc": descrController.text,
+        "frameWork": frameworkValue,
+        "difficulty": DifficultyValue,
+        "belongsTo": belongtoValue,
+        "LeadedBy": leadbyValue,
+        "alottedTimeInHoure": nooftime,
+        "appliedForApproval": false,
+        "defaulted": false,
+        "paid": false,
+        "assignedTo": null
+      }).then((value) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: ((context) => AdminHome())));
+      });
+    } on FirebaseException catch (e) {
+      print(e.code);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +84,7 @@ class _AddTaskState extends State<AddTask> {
               height: 5,
             ),
             TextField(
+              controller: titleController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Task Title',
@@ -66,6 +95,7 @@ class _AddTaskState extends State<AddTask> {
               height: 20,
             ),
             TextField(
+              controller: descrController,
               decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Task Discription',
@@ -202,7 +232,7 @@ class _AddTaskState extends State<AddTask> {
             // Submit button
             ElevatedButton(
               child: const Text('Submit'),
-              onPressed: () {},
+              onPressed: addTaskHandler,
             ),
           ],
         ),

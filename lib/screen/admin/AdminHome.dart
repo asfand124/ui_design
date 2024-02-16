@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_design/component/Task.dart';
-import 'package:ui_design/component/Upcoming.dart';
+import 'package:ui_design/component/UpComingTasks.dart';
+
 import 'package:ui_design/component/notification.dart';
 import 'package:ui_design/screen/admin/Addtask.dart';
 import 'package:ui_design/screen/user/Nextpage.dart';
@@ -16,7 +17,7 @@ class AdminHome extends StatefulWidget {
 }
 
 class _AdminHomeState extends State<AdminHome> {
-  List<Map<String, dynamic>> avaliblrTasks = [];
+  List<Map<String, dynamic>> avalibleTasks = [];
 
   @override
   void initState() {
@@ -28,14 +29,17 @@ class _AdminHomeState extends State<AdminHome> {
   getAllUpcomingTasks() async {
     await FirebaseFirestore.instance
         .collection("Tasks")
-        .where("assignedTo", isEqualTo: "")
+        .where("assignedTo", isEqualTo: null)
         .get()
         .then((response) {
-      for (var res in response.docs) {
-        setState(() {
-          avaliblrTasks.add(res.data());
-        });
-      }
+      List<Map<String, dynamic>> tempRecords = [];
+      response.docs.forEach((element) {
+        tempRecords.add({...element.data(), "id": element.id});
+      });
+
+      setState(() {
+        avalibleTasks = tempRecords;
+      });
     });
   }
 
@@ -135,83 +139,10 @@ class _AdminHomeState extends State<AdminHome> {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  height: 40,
-                  width: MediaQuery.of(context).size.width * 0.88,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'UPCOMING ',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: GoogleFonts.inter().fontFamily,
-                              ),
-                            ),
-                            // ----------------notification page--------------------
-                            notification(notifi: '3'),
-                          ],
-                        ),
-                        //------------------------------next page---------------------------
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => Dis(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Column(
-                              children: [
-                                Text(
-                                  '...',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: GoogleFonts.inter().fontFamily,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
 
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Upcoming(
-                            frameWork: "flutter",
-                            title: "LoginScreen",
-                            time: '3 Hr',
-                            Difficulty: 'Difficulty : Hard',
-                            discription:
-                                'Make a page display about services for websites company with blue and red colors'),
-                        SizedBox(width: 5),
-                      ],
-                    ),
-                  ),
-                )
+                UpcomingTasks(dataStream: avalibleTasks),
+
+                //
               ],
             ),
           ),
