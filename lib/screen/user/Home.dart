@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_design/component/Task.dart';
+import 'package:ui_design/component/TaskTimer.dart';
 import 'package:ui_design/component/UpComingTasks.dart';
 
 import 'package:ui_design/component/notification.dart';
@@ -72,7 +73,7 @@ class _HomeState extends State<Home> {
   getAllUpcomingTasks() async {
     await FirebaseFirestore.instance
         .collection("Tasks")
-        .where("assignedTo", isNotEqualTo: null)
+        .where("assignedTo", isEqualTo: null)
         .get()
         .then((response) {
       List<Map<String, dynamic>> tempRecords = [];
@@ -143,6 +144,8 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: 10,
             ),
+            TaskTimer(),
+
             isTaskActive
                 ? Task(
                     title: activeTask['Title'],
