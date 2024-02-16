@@ -59,8 +59,7 @@ class _ClientDataState extends State<Wallet> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
+    return  SafeArea(
         child: Column(
           children: [
             Container(
@@ -161,62 +160,8 @@ class _ClientDataState extends State<Wallet> {
             ),
           ],
         ),
-      ),
+    
       /////////////////////////////////////////////////////////////
-      bottomNavigationBar: Container(
-        height: 60,
-        decoration: const BoxDecoration(
-          color: Color(0xff0047AB),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => Home(),
-                  ),
-                );
-              },
-              child: Icon(
-                Icons.home,
-                color: Colors.white,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => Profile(),
-                  ),
-                );
-              },
-              child: Icon(
-                Icons.person,
-                color: Colors.white,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => Wallet(),
-                  ),
-                );
-              },
-              child: Icon(
-                Icons.wallet,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

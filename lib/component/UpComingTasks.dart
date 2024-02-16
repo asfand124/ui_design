@@ -49,7 +49,7 @@ class UpcomingTasks extends StatelessWidget {
                         ),
                       );
                     },
-                    child: notification(notifi: '3'),
+                    child: notification(notifi:"${dataStream.length}"),
                   ),
                 ],
               ),
@@ -58,7 +58,7 @@ class UpcomingTasks extends StatelessWidget {
           Divider(),
           // cARDS
           SizedBox(
-            height: 350,
+            height: 300,
             child: PageView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: dataStream.length,

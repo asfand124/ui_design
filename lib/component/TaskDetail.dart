@@ -110,7 +110,7 @@ class TaskDetail extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Center(
+             getUserType()=="admin"?SizedBox(): Center(
                 child: ElevatedButton(
                     onPressed: startTask,
                     style: ElevatedButton.styleFrom(
@@ -125,9 +125,6 @@ class TaskDetail extends StatelessWidget {
                           fontFamily: GoogleFonts.inter().fontFamily,
                           color: Colors.white),
                     )),
-              ),
-              SizedBox(
-                height: 40,
               ),
             ],
           ),

@@ -88,141 +88,82 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xffEAF0F0),
-      body: SafeArea(
+    return Container(
+      
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: [
-                Container(
-                  height: 70,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(left: 20, right: 20, top: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Hi, ${userDetails['Name']}',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: GoogleFonts.inter().fontFamily,
-                              ),
+          child: Column(
+            children: [
+              Container(
+                height: 70,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20, right: 20, top: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Hi, ${userDetails['Name']}',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: GoogleFonts.inter().fontFamily,
                             ),
-                            Text(
-                              'Are you ready to get back to work?',
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: GoogleFonts.inter().fontFamily,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            color: Color(0xffFB6565),
-                            borderRadius: BorderRadius.circular(100),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                //-------------------component----------------------------
-                SizedBox(
-                  height: 20,
-                ),
-                isTaskActive
-                    ? Task(
-                        title: activeTask['Title'],
-                        time: activeTask['assignedAt'],
-                        month: "hghg",
-                        year: ' 2020',
-                        endtime: activeTask['id'])
-                    : Center(
-                        child: Text("No Active task"),
+                          Text(
+                            'Are you ready to get back to work?',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: GoogleFonts.inter().fontFamily,
+                            ),
+                          ),
+                        ],
                       ),
-                SizedBox(
-                  height: 20,
+                      Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFB6565),
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-
-                // Upcoming Tasks
-                UpcomingTasks(dataStream: availableTasks)
-              ],
-            ),
+              ),
+              //-------------------component----------------------------
+             
+              isTaskActive
+                  ? Task(
+                      title: activeTask['Title'],
+                      time: activeTask['assignedAt'],
+                      month: "hghg",
+                      year: ' 2020',
+                      endtime: activeTask['id'])
+                  : Center(
+                      child: Text("No Active task"),
+                    ),
+              SizedBox(
+                height: 10,
+              ),
+          
+              // Upcoming Tasks
+              UpcomingTasks(dataStream: availableTasks)
+            ],
           ),
         ),
-      ),
-      bottomNavigationBar: Container(
-        height: 60,
-        decoration: BoxDecoration(
-          color: Color(0xff0047AB),
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => Home(),
-                  ),
-                );
-              },
-              child: Icon(
-                Icons.home,
-                color: Colors.white,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => Profile(),
-                  ),
-                );
-              },
-              child: Icon(
-                Icons.person,
-                color: Colors.white,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => Wallet(),
-                  ),
-                );
-              },
-              child: Icon(
-                Icons.wallet,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-      ),
+      
+     
     );
   }
 }

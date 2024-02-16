@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:ui_design/screen/Home.dart';
-import 'package:ui_design/screen/Signup.dart';
+import 'package:ui_design/Authentication/Signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ui_design/PageNavigation.dart';
+import 'package:ui_design/adminnavigationpage.dart';
 import 'package:ui_design/screen/admin/AdminHome.dart';
 import 'package:ui_design/screen/user/Home.dart';
 
@@ -27,14 +29,14 @@ class _LoginState extends State<Login> {
       case "user":
         {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: ((context) => Home())));
+              .push(MaterialPageRoute(builder: ((context) => PageNavigation())));
           break;
         }
 
       case "admin":
         {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: ((context) => AdminHome())));
+              .push(MaterialPageRoute(builder: ((context) => AdminPageNavigation())));
           break;
         }
     }

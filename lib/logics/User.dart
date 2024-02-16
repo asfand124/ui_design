@@ -10,18 +10,29 @@ getUserId() {
   }
 }
 
-getUserType() {
+
+ getUserType() async {
   String uid = getUserId();
-  String type = "";
+  String type = "user";
+
   if (uid != "") {
     final docRef = FirebaseFirestore.instance.collection("Users").doc(uid);
-    docRef.get().then(
-      (doc) {
-        type = doc.data()!["Type"];
-      },
-      onError: (e) => print("Error getting getUser Type: $e"),
-    );
+
+    try {
+      var doc = await docRef.get();
+      if (doc.exists) {
+       
+        type= doc.data()!["Type"];
+      } else {
+        print("Document does not exist");
+       
+      }
+    } catch (e) {
+      print("Error getting user type: $e");
+ 
+    }
   }
+
   return type;
 }
 

@@ -7,19 +7,7 @@ class Dis extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back,
-          ),
-        ),
-      ),
-      backgroundColor: Color(0xffEAF0F0),
-      body: SafeArea(
+    return  SafeArea(
         child: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -37,7 +25,7 @@ class Dis extends StatelessWidget {
             ),
           ),
         ),
-      ),
+    
     );
   }
 }
