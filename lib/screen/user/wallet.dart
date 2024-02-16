@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_design/component/textstyles.dart';
 import 'package:ui_design/screen/user/Home.dart';
@@ -11,12 +13,27 @@ class Wallet extends StatefulWidget {
 }
 
 class _ClientDataState extends State<Wallet> {
+  Map<String, dynamic> TransactionDetail = {};
+  getTranscetionDetail() {
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+
+    FirebaseFirestore.instance
+        .collection("Transection")
+        .where("Tuser")
+        .get()
+        .then((response) {
+      setState(() {
+        TransactionDetail = {};
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: [            
+          children: [
             Container(
               height: MediaQuery.of(context).size.height * 0.07,
               width: MediaQuery.of(context).size.width,
@@ -41,7 +58,7 @@ class _ClientDataState extends State<Wallet> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.1,
                         ),
-                       const Icon(Icons.logout, color: Colors.white)
+                        const Icon(Icons.logout, color: Colors.white)
                       ],
                     )
                   ],
@@ -57,16 +74,13 @@ class _ClientDataState extends State<Wallet> {
               decoration: BoxDecoration(
                   color: Colors.purple,
                   borderRadius: BorderRadius.circular(10)),
-              child:  Column(
+              child: Column(
                 children: [
                   Text(
                     "Name",
-                     style: txt20700(),
+                    style: txt20700(),
                   ),
-                  Text(
-                    "RS 1000",
-                    style: txt20700()
-                  ),
+                  Text("RS 1000", style: txt20700()),
                 ],
               ),
             ),
@@ -84,17 +98,20 @@ class _ClientDataState extends State<Wallet> {
                   children: [
                     Text(
                       "Project Statements",
-                      style: txt20700(),),
+                      style: txt20700(),
+                    ),
                     Divider(),
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                      colcon(Colors.white),
-                      Text("Widthdraw",style: txt15600()),
-                      colcon(Colors.green),
-                      Text("Avalible",style: txt15600()),
-                      colcon(Colors.red),
-                      Text("Rejected",style: txt15600()),
-                    ],),
+                        colcon(Colors.white),
+                        Text("Widthdraw", style: txt15600()),
+                        colcon(Colors.green),
+                        Text("Avalible", style: txt15600()),
+                        colcon(Colors.red),
+                        Text("Rejected", style: txt15600()),
+                      ],
+                    ),
                     Divider(),
                     Column(
                       children: [
@@ -112,35 +129,27 @@ class _ClientDataState extends State<Wallet> {
                           ],
                         ),
                         Row(
-                        
-                        children: [
-                          Text(
-                            "Date: ",
-                            style: txt15600()
-                          ),
-                          Text(
-                            "02 Feburary 2024",
-                            style: txt15600()
-                                
-                          ),
-                        ],
-                      ),
+                          children: [
+                            Text("Date: ", style: txt15600()),
+                            Text("02 Feburary 2024", style: txt15600()),
+                          ],
+                        ),
                       ],
                     ),
                     Divider(),
-                     Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "WithDraw",
-                              style: txt15700(),
-                            ),
-                            Text(
-                              "RS 1000",
-                              style: txt15700(),
-                            ),
-                          ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "WithDraw",
+                          style: txt15700(),
                         ),
+                        Text(
+                          "RS 1000",
+                          style: txt15700(),
+                        ),
+                      ],
+                    ),
                     Column(
                       children: [
                         Row(
@@ -157,19 +166,11 @@ class _ClientDataState extends State<Wallet> {
                           ],
                         ),
                         Row(
-                        
-                        children: [
-                          Text(
-                            "Date: ",
-                            style: txt15600()
-                          ),
-                          Text(
-                            "02 Feburary 2024",
-                            style: txt15600()
-                                
-                          ),
-                        ],
-                      ),
+                          children: [
+                            Text("Date: ", style: txt15600()),
+                            Text("02 Feburary 2024", style: txt15600()),
+                          ],
+                        ),
                       ],
                     ),
                     Divider(),
@@ -189,19 +190,11 @@ class _ClientDataState extends State<Wallet> {
                           ],
                         ),
                         Row(
-                        
-                        children: [
-                          Text(
-                            "Date: ",
-                            style: txt15600()
-                          ),
-                          Text(
-                            "02 Feburary 2024",
-                            style: txt15600()
-                                
-                          ),
-                        ],
-                      ),
+                          children: [
+                            Text("Date: ", style: txt15600()),
+                            Text("02 Feburary 2024", style: txt15600()),
+                          ],
+                        ),
                       ],
                     ),
                     Divider()
@@ -270,13 +263,13 @@ class _ClientDataState extends State<Wallet> {
     );
   }
 }
-Widget colcon(
-  Color color
-){
+
+Widget colcon(Color color) {
   return Container(
     height: 10,
-              width:10,
-              decoration:  BoxDecoration(
-                color: color,
-              ),);
+    width: 10,
+    decoration: BoxDecoration(
+      color: color,
+    ),
+  );
 }

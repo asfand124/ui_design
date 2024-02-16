@@ -72,7 +72,7 @@ class _HomeState extends State<Home> {
   getAllUpcomingTasks() async {
     await FirebaseFirestore.instance
         .collection("Tasks")
-        .where("assignedTo", isEqualTo: "")
+        .where("  ", isEqualTo: "")
         .get()
         .then((response) {
       for (var res in response.docs) {
