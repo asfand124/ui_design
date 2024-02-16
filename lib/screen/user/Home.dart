@@ -77,7 +77,7 @@ class _HomeState extends State<Home> {
         .then((response) {
       List<Map<String, dynamic>> tempRecords = [];
       response.docs.forEach((element) {
-        tempRecords.add(element.data());
+        tempRecords.add({...element.data(), 'id': element.id});
       });
 
       setState(() {
@@ -89,81 +89,79 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-          child: Column(
-            children: [
-              Container(
-                height: 70,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 20, right: 20, top: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Hi, ${userDetails['Name']}',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: GoogleFonts.inter().fontFamily,
-                            ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+        child: Column(
+          children: [
+            Container(
+              height: 70,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Hi, ${userDetails['Name']}',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: GoogleFonts.inter().fontFamily,
                           ),
-                          Text(
-                            'Are you ready to get back to work?',
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: GoogleFonts.inter().fontFamily,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          color: Color(0xffFB6565),
-                          borderRadius: BorderRadius.circular(100),
                         ),
+                        Text(
+                          'Are you ready to get back to work?',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: GoogleFonts.inter().fontFamily,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color: Color(0xffFB6565),
+                        borderRadius: BorderRadius.circular(100),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              //-------------------component----------------------------
-             SizedBox(height: 10,),
-              isTaskActive
-                  ? Task(
-                      title: activeTask['Title'],
-                      time: activeTask['assignedAt'],
-                      month: "hghg",
-                      year: ' 2020',
-                      endtime: activeTask['id'])
-                  : Center(
-                      child: Text("No Active task"),
-                    ),
-              SizedBox(
-                height: 10,
-              ),
-          
-              // Upcoming Tasks
-              UpcomingTasks(dataStream: availableTasks)
-            ],
-          ),
+            ),
+            //-------------------component----------------------------
+            SizedBox(
+              height: 10,
+            ),
+            isTaskActive
+                ? Task(
+                    title: activeTask['Title'],
+                    time: activeTask['assignedAt'],
+                    month: "hghg",
+                    year: ' 2020',
+                    endtime: activeTask['id'])
+                : Center(
+                    child: Text("No Active task"),
+                  ),
+            SizedBox(
+              height: 10,
+            ),
+
+            // Upcoming Tasks
+            UpcomingTasks(dataStream: availableTasks)
+          ],
         ),
-      
-     
+      ),
     );
   }
 }
