@@ -72,7 +72,7 @@ class _HomeState extends State<Home> {
   getAllUpcomingTasks() async {
     await FirebaseFirestore.instance
         .collection("Tasks")
-        .where("assignedTo", isEqualTo: null)
+        .where("assignedTo", isNotEqualTo: null)
         .get()
         .then((response) {
       List<Map<String, dynamic>> tempRecords = [];
