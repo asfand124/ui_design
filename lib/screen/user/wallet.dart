@@ -13,61 +13,56 @@ class Wallet extends StatefulWidget {
 }
 
 class _ClientDataState extends State<Wallet> {
-  List  TransactionDetail = [];
-  String Credit="";
-  bool isLoading=true;
+  List TransactionDetail = [];
+  String Credit = "";
+  bool isLoading = true;
 
   @override
- void initState() {
+  void initState() {
     super.initState();
     getTransactionDetail();
     getUserDetail();
     setState(() {
-      isLoading=false;
+      isLoading = false;
     });
   }
 
-
-  getTransactionDetail(){
-    String userId= FirebaseAuth.instance.currentUser!.uid;
-    FirebaseFirestore.instance.collection("Transection")
-    .where("empID",isEqualTo: userId)..orderBy('date', descending: true)
-    .get().
-    then((res) {
-      List tempData=[];
-      res.docs.forEach((element) { 
-tempData.add(element.data());
+  getTransactionDetail() {
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+    FirebaseFirestore.instance
+        .collection("Transection")
+        .where("empID", isEqualTo: userId)
+      ..orderBy('date', descending: true).get().then((res) {
+        List tempData = [];
+        res.docs.forEach((element) {
+          tempData.add(element.data());
+        });
+        setState(() {
+          TransactionDetail = tempData;
+        });
+        print(TransactionDetail);
       });
-           setState(() {
-             TransactionDetail=tempData;
-           });
-           print(TransactionDetail);
-    });
   }
-  
-getUserDetail() async {
+
+  getUserDetail() async {
     String userId = FirebaseAuth.instance.currentUser!.uid;
     await FirebaseFirestore.instance
         .collection("Users")
         .doc(userId)
         .get()
         .then((response) {
-  setState(() {
-   Credit= response.data()!['Credit'].toString();
-  });
-        
-      
+      setState(() {
+        Credit = response.data()!['Credit'].toString();
+      });
     });
   }
- 
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: [            
+          children: [
             Container(
               height: MediaQuery.of(context).size.height * 0.07,
               width: MediaQuery.of(context).size.width,
@@ -114,10 +109,7 @@ getUserDetail() async {
                     "Name",
                     style: txt20700(),
                   ),
-                  Text(
-                    "RS ${Credit}",
-                    style: txt20700()
-                  ),
+                  Text("RS ${Credit}", style: txt20700()),
                 ],
               ),
             ),
@@ -125,7 +117,6 @@ getUserDetail() async {
               height: MediaQuery.of(context).size.height * 0.02,
             ),
             Container(
-            
               decoration: const BoxDecoration(
                 color: Colors.purple,
               ),
@@ -135,7 +126,8 @@ getUserDetail() async {
                   children: [
                     Text(
                       "Project Statements",
-                      style: txt20700(),),
+                      style: txt20700(),
+                    ),
                     // Divider(),
                     // Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     //   children: [
@@ -147,38 +139,35 @@ getUserDetail() async {
                     //   Text("Rejected",style: txt15600()),
                     // ],),
                     // Divider(),
-                  
+
                     Divider(),
-                Column(
-                  children: TransactionDetail.map((e) => 
-                   Column(
-                     children: [
-                       containertransaction(
-                                         "${e['type']}",
-                                         "${e['TName']}",
-                                         "${e['TAmount']}",
-                       e['date'] as Timestamp,
-                   
-                          ),
-                          
-                     ],
-                   ),
-                      
+                    Column(
+                      children: TransactionDetail.map(
+                        (e) => Column(
+                          children: [
+                            containertransaction(
+                              "${e['type']}",
+                              "${e['TName']}",
+                              "${e['TAmount']}",
+                              e['date'] as Timestamp,
+                            ),
+                          ],
+                        ),
                       ).toList(),
-                ),
+                    ),
                   ],
                 ),
               ),
-            )
+            ),
           ],
-        ):const Center(child: CircularProgressIndicator(color: Colors.black,))
+        ),
       ),
       /////////////////////////////////////////////////////////////
       bottomNavigationBar: Container(
         height: 60,
         decoration: const BoxDecoration(
           color: Color(0xff0047AB),
-          borderRadius:  BorderRadius.only(
+          borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
           ),
@@ -231,10 +220,9 @@ getUserDetail() async {
     );
   }
 }
+
 //////////////////////////////////////////
-Widget colcon(
-  Color color
-){
+Widget colcon(Color color) {
   return Container(
     height: 10,
     width: 10,
@@ -243,61 +231,55 @@ Widget colcon(
     ),
   );
 }
-Widget containertransaction(
-  String status, String title, String amount, Timestamp date
-){
-final firebaseTimestamp = date;
-  return Container(
-    margin: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
 
-              height: 65,
-              decoration:  BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: status=="debit"? Color.fromARGB(255, 241, 179, 98):Color.fromARGB(255, 83, 187, 86),
+Widget containertransaction(
+    String status, String title, String amount, Timestamp date) {
+  final firebaseTimestamp = date;
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+    height: 65,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(15),
+      color: status == "debit"
+          ? Color.fromARGB(255, 241, 179, 98)
+          : Color.fromARGB(255, 83, 187, 86),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: txt15700(),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [                            
-                              Text(
-                                title,
-                                style: txt15700(),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "RS",
-                                    style: txt15600(),
-                                  ),
-                                  SizedBox(width: 10,),
-                                  Text(
-                                    amount,
-                                    style: txt15600(),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Row(
-                          
-                          children: [
-                            Text(
-                              "Date: ",
-                              style: txt15600()
-                            ),
-                            Text(
-                             firebaseTimestamp.toDate().toString(),
-                              style: txt15600()
-                                  
-                            ),
-                          ],
-                        ),
-                        ],
-                      ),
+              Row(
+                children: [
+                  Text(
+                    "RS",
+                    style: txt15600(),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    amount,
+                    style: txt15600(),
+                  ),
+                ],
               ),
-                   
-                    );
+            ],
+          ),
+          Row(
+            children: [
+              Text("Date: ", style: txt15600()),
+              Text(firebaseTimestamp.toDate().toString(), style: txt15600()),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
 }
