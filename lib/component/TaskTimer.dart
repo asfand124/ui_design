@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:timer_builder/timer_builder.dart';
 
 class TaskTimer extends StatefulWidget {
@@ -12,41 +13,31 @@ class _TaskTimerState extends State<TaskTimer> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
-        Duration remainingTime = assignedAt
-            .add(Duration(hours: taskDuration))
-            .difference(DateTime.now().toUtc());
-        int elapsedHours = taskDuration * 3600 -
-            remainingTime.inSeconds.clamp(0, taskDuration * 3600);
+    return TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
+      Duration remainingTime = assignedAt
+          .add(Duration(hours: taskDuration))
+          .difference(DateTime.now().toUtc());
+      int elapsedHours = taskDuration * 3600 -
+          remainingTime.inSeconds.clamp(0, taskDuration * 3600);
 
-        String extraText;
-        if (remainingTime.inSeconds <= 0) {
-          extraText = '-time';
-        } else if (remainingTime.inSeconds <= taskDuration * 3600) {
-          extraText = 'x1';
-        } else if (remainingTime.inSeconds <= taskDuration * 2 * 3600) {
-          extraText = 'x2';
-        } else {
-          extraText = 'x3';
-        }
+      String extraText;
+      if (remainingTime.inSeconds <= 0) {
+        extraText = '-time';
+      } else if (remainingTime.inSeconds <= taskDuration * 3600) {
+        extraText = 'x1';
+      } else if (remainingTime.inSeconds <= taskDuration * 2 * 3600) {
+        extraText = 'x2';
+      } else {
+        extraText = 'x3';
+      }
 
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Countdown: ${_formatDuration(remainingTime)} $extraText',
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Elapsed Extra Time: ${_formatDuration(Duration(seconds: elapsedHours))}',
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
-        );
-      }),
-    );
+      return Text(' ${_formatDuration(remainingTime)} $extraText',
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            fontFamily: GoogleFonts.inter().fontFamily,
+          ));
+    });
   }
 
   String _formatDuration(Duration duration) {

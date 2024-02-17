@@ -144,15 +144,14 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: 10,
             ),
-            TaskTimer(),
 
             isTaskActive
                 ? Task(
                     title: activeTask['Title'],
                     time: activeTask['assignedAt'],
-                    month: "hghg",
-                    year: ' 2020',
-                    endtime: activeTask['id'])
+                    taskID: activeTask['id'],
+                    submitForApproval: activeTask['submittedForApproval'],
+                  )
                 : Center(
                     child: Text("No Active task"),
                   ),

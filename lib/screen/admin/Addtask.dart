@@ -52,6 +52,8 @@ class _AddTaskState extends State<AddTask> {
         "defaulted": false,
         "paid": false,
         "assignedTo": null,
+        "assignedAt": null,
+        "Completed": false,
         "createdAt": FieldValue.serverTimestamp(),
       }).then((value) {
         Navigator.push(

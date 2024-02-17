@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 // import 'package:ui_design/screen/Home.dart';
 import 'package:ui_design/Authentication/Signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,29 +29,33 @@ class _LoginState extends State<Login> {
     switch (title) {
       case "user":
         {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: ((context) => PageNavigation())));
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: ((context) => PageNavigation())));
           break;
         }
 
       case "admin":
         {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: ((context) => AdminPageNavigation())));
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: ((context) => AdminPageNavigation())));
           break;
         }
     }
   }
 
   Signin() async {
+    EasyLoading.show(status: "Loading...");
     try {
       FirebaseAuth.instance
           .signInWithEmailAndPassword(email: _email.text, password: _pass.text)
           .then((res) {
         getUserType(res.user?.uid);
+        EasyLoading.dismiss();
       });
+    } on FirebaseAuthException catch (e) {
+      EasyLoading.showToast(e.code);
     } catch (e) {
-      print(e);
+      EasyLoading.showToast(e.toString());
     }
   }
 
