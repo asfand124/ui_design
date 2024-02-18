@@ -11,11 +11,17 @@ const List<String> framework = <String>[
   'Figma'
 ];
 const List<String> Difficulty = <String>[
-  'easy',
-  'hard',
+  'Easy',
+  'Medium',
+  'Hard',
 ];
-const List<String> leadby = <String>['huzi', 'Umer', "wajid", "Abdullah"];
-const List<String> belongto = <String>[
+List<Map> leadby = <Map>[
+  {"name": "huzaifa", "id": "123456"},
+  {"name": "huzaifa", "id": "123456"},
+  {"name": "huzaifa", "id": "123456"},
+  {"name": "huzaifa", "id": "123456"},
+];
+List<String> projectName = <String>[
   'settle loan',
   'the tour',
   'leads',
@@ -32,11 +38,52 @@ class _AddTaskState extends State<AddTask> {
   String frameworkValue = framework.first;
   String DifficultyValue = framework.first;
   String leadbyValue = framework.first;
-  String belongtoValue = framework.first;
+  String projectNameValue = framework.first;
 
   TextEditingController titleController = TextEditingController();
   TextEditingController descrController = TextEditingController();
   int nooftime = 0;
+  @override
+  void initState() {
+    super.initState();
+    getProjectsName();
+    getEmployeeList();
+  }
+
+  getProjectsName() {
+    FirebaseFirestore.instance.collection("Projects").get().then(
+      (querySnapshot) {
+        List<String> tempData = [];
+        querySnapshot.docs.forEach((doc) {
+          print(doc.id);
+          tempData.add(doc.id);
+        });
+        setState(() {
+          projectName = tempData;
+        });
+      },
+      onError: (e) => print("Error completing: $e"),
+    );
+  }
+
+  getEmployeeList() {
+    FirebaseFirestore.instance
+        .collection("Users")
+        .where('Type', isEqualTo: "user")
+        .get()
+        .then(
+      (querySnapshot) {
+        List<Map> tempData = [];
+        querySnapshot.docs.forEach((doc) {
+          tempData.add({"name": doc.data()['Name'], "id": doc.id});
+        });
+        setState(() {
+          leadby = tempData;
+        });
+      },
+      onError: (e) => print("Error completing: $e"),
+    );
+  }
 
   addTaskHandler() {
     try {
@@ -45,8 +92,8 @@ class _AddTaskState extends State<AddTask> {
         "Desc": descrController.text,
         "frameWork": frameworkValue,
         "difficulty": DifficultyValue,
-        "belongsTo": belongtoValue,
-        "LeadedBy": leadbyValue,
+        "belongsTo": projectNameValue,
+        "leaderID": leadbyValue,
         "alottedTimeInHoure": nooftime,
         "appliedForApproval": false,
         "defaulted": false,
@@ -178,14 +225,14 @@ class _AddTaskState extends State<AddTask> {
             ),
             // belont to dropdown
             DropdownMenu<String>(
-              initialSelection: belongto.first,
+              initialSelection: projectName.first,
               onSelected: (String? value) {
                 setState(() {
-                  belongtoValue = value!;
+                  projectNameValue = value!;
                 });
               },
               dropdownMenuEntries:
-                  belongto.map<DropdownMenuEntry<String>>((String value) {
+                  projectName.map<DropdownMenuEntry<String>>((String value) {
                 return DropdownMenuEntry<String>(value: value, label: value);
               }).toList(),
             ),
@@ -198,15 +245,16 @@ class _AddTaskState extends State<AddTask> {
             ),
             // Lead By dropdown
             DropdownMenu<String>(
-              initialSelection: leadby.first,
+              initialSelection: leadby.first["name"],
               onSelected: (String? value) {
                 setState(() {
                   leadbyValue = value!;
                 });
               },
               dropdownMenuEntries:
-                  leadby.map<DropdownMenuEntry<String>>((String value) {
-                return DropdownMenuEntry<String>(value: value, label: value);
+                  leadby.map<DropdownMenuEntry<String>>((employee) {
+                return DropdownMenuEntry<String>(
+                    value: employee['id'], label: employee["name"]);
               }).toList(),
             ),
             SizedBox(

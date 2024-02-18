@@ -3,24 +3,25 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:timer_builder/timer_builder.dart';
 import 'package:ui_design/PageNavigation.dart';
-import 'package:ui_design/component/TaskTimer.dart';
 import 'package:ui_design/screen/user/Home.dart';
 import 'package:ui_design/Authentication/Login.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class Task extends StatefulWidget {
   final title;
-  final time;
+  final DateTime time;
   final taskID;
   final bool submitForApproval;
-  Task({
-    super.key,
-    required this.title,
-    required this.time,
-    required this.taskID,
-    required this.submitForApproval,
-  });
+  final int allotedTime;
+  Task(
+      {super.key,
+      required this.title,
+      required this.time,
+      required this.taskID,
+      required this.submitForApproval,
+      required this.allotedTime});
 
   @override
   State<Task> createState() => _TaskState();
@@ -32,18 +33,31 @@ class _TaskState extends State<Task> {
   int noofcharts = 0;
   int noofcondition = 0;
   bool isReponsive = false;
+  DateTime assignedAt = DateTime.parse("2001-11-11 00:00:00").toUtc();
+  int taskDuration = 1;
+  String timeFrame = "x1";
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      assignedAt = widget.time.toUtc();
+      taskDuration = widget.allotedTime;
+    });
+  }
 
   TextEditingController _commentController = TextEditingController();
   ActiveBtnHandler() {
     FirebaseFirestore.instance.collection("Tasks").doc(widget.taskID).update({
       "submittedForApproval": true,
+      "submittedAt": FieldValue.serverTimestamp(),
       "TaskData": {
-        "Comment": _commentController.text,
-        "Responsive": isReponsive,
-        "NoApiCalls": noofapicall,
-        "NoChart": noofcharts,
-        "NoCondition": noofcondition,
-        "NoMaps": noofmaps,
+        "Commit": _commentController.text,
+        "responsiveness": isReponsive,
+        "NoapiCalling": noofapicall,
+        "Nograph": noofcharts,
+        "Nocondition": noofcondition,
+        "NogoogleMapIntegration": noofmaps,
+        "TimeFrame": timeFrame,
       },
     }).then((value) {
       Navigator.push(
@@ -98,7 +112,27 @@ class _TaskState extends State<Task> {
                       color: Colors.grey),
                 ),
                 Text(
-                  "${widget.time.toDate()}",
+                  "${widget.time.hour}:${widget.time.minute}",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: GoogleFonts.inter().fontFamily,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  'Started at  : ',
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: GoogleFonts.inter().fontFamily,
+                      color: Colors.grey),
+                ),
+                Text(
+                  "${widget.time.day}/${widget.time.month}/${widget.time.year}",
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -119,7 +153,35 @@ class _TaskState extends State<Task> {
                         fontFamily: GoogleFonts.inter().fontFamily,
                         color: Colors.grey),
                   ),
-                  TaskTimer()
+                  TimerBuilder.periodic(Duration(seconds: 1),
+                      builder: (context) {
+                    Duration remainingTime = assignedAt
+                        .add(Duration(hours: taskDuration))
+                        .difference(DateTime.now().toUtc());
+                    int elapsedHours = taskDuration * 3600 -
+                        remainingTime.inSeconds.clamp(0, taskDuration * 3600);
+
+                    String extraText;
+                    if (remainingTime.inSeconds <= 0) {
+                      extraText = 'x4';
+                    } else if (remainingTime.inSeconds <= taskDuration * 3600) {
+                      extraText = 'x1';
+                    } else if (remainingTime.inSeconds <=
+                        taskDuration * 2 * 3600) {
+                      extraText = 'x2';
+                    } else {
+                      extraText = 'x3';
+                    }
+
+                    timeFrame = extraText;
+
+                    return Text(' ${_formatDuration(remainingTime)} $timeFrame',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: GoogleFonts.inter().fontFamily,
+                        ));
+                  })
                 ],
               ),
             ),
@@ -406,5 +468,12 @@ class _TaskState extends State<Task> {
         ),
       ),
     );
+  }
+
+  String _formatDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    return '${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds';
   }
 }

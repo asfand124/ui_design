@@ -7,17 +7,16 @@ class PageNavigation extends StatefulWidget {
   const PageNavigation({Key? key}) : super(key: key);
 
   @override
-  _PageNavigationState createState() =>
-      _PageNavigationState();
+  _PageNavigationState createState() => _PageNavigationState();
 }
 
 class _PageNavigationState extends State {
   int _selectedTab = 0;
 
   List _pages = [
-     Home(),
-     Wallet(),
-     Profile(),
+    Home(),
+    Wallet(),
+    Profile(),
     Center(
       child: Text("Contact"),
     ),
@@ -36,10 +35,8 @@ class _PageNavigationState extends State {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 252, 237, 192),
-      
       body: SafeArea(child: _pages[_selectedTab]),
-      
-bottomNavigationBar: Theme(
+      bottomNavigationBar: Theme(
         data: ThemeData(
           canvasColor: Color.fromARGB(255, 44, 62, 168),
         ),

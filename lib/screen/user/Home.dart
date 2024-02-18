@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_design/component/Task.dart';
-import 'package:ui_design/component/TaskTimer.dart';
+
 import 'package:ui_design/component/UpComingTasks.dart';
 
 import 'package:ui_design/component/notification.dart';
@@ -148,9 +148,10 @@ class _HomeState extends State<Home> {
             isTaskActive
                 ? Task(
                     title: activeTask['Title'],
-                    time: activeTask['assignedAt'],
+                    time: activeTask['assignedAt'].toDate(),
                     taskID: activeTask['id'],
                     submitForApproval: activeTask['submittedForApproval'],
+                    allotedTime: activeTask['alottedTimeInHours'],
                   )
                 : Center(
                     child: Text("No Active task"),

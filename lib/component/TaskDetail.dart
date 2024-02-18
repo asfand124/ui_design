@@ -2,55 +2,162 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_design/PageNavigation.dart';
+import 'package:ui_design/adminnavigationpage.dart';
 import 'package:ui_design/logics/User.dart';
 
-import '../screen/user/Home.dart';
-
-class TaskDetail extends StatelessWidget {
+class TaskDetail extends StatefulWidget {
   final Map<String, dynamic> taskDetails;
-  const TaskDetail({super.key, required this.taskDetails});
-  @override
-  Widget build(BuildContext context) {
-    updateUserActiveTask() {
-      try {
-        FirebaseFirestore.instance
-            .collection("Users")
-            .doc(getUserId())
-            .update({'activeTask': taskDetails['id']}).then((value) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: ((context) => PageNavigation())));
-        });
-      } on FirebaseException catch (e) {
-        print(e.code);
-      }
-    }
+  final bool showTaskData;
+  final bool showApprovalOptions;
+  const TaskDetail(
+      {super.key,
+      required this.taskDetails,
+      this.showTaskData = false,
+      this.showApprovalOptions = false});
 
-    startTask() {
-      getUserCurrentTaskId().then((value) {
-        print(value);
-        if (value == "") {
-          print("Asign task : ${taskDetails['id']}");
-          try {
-            FirebaseFirestore.instance
-                .collection("Tasks")
-                .doc(taskDetails['id'])
-                .update({
-              "assignedAt": FieldValue.serverTimestamp(),
-              "assignedTo": getUserId()
-            }).then((value) {
-              updateUserActiveTask();
+  @override
+  State<TaskDetail> createState() => _TaskDetailState();
+}
+
+class _TaskDetailState extends State<TaskDetail> {
+  List PaymentDetails = [];
+  String TimeFrame = "x1";
+  num TotalPayable = 0;
+  @override
+  void initState() {
+    super.initState();
+    if (widget.showTaskData) {
+      getPayments();
+    }
+  }
+
+  updateUserActiveTask() {
+    try {
+      FirebaseFirestore.instance
+          .collection("Users")
+          .doc(getUserId())
+          .update({'activeTask': widget.taskDetails['id']}).then((value) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: ((context) => PageNavigation())));
+      });
+    } on FirebaseException catch (e) {
+      print(e.code);
+    }
+  }
+
+  startTask() {
+    getUserCurrentTaskId().then((value) {
+      print(value);
+      if (value == "") {
+        print("Asign task : ${widget.taskDetails['id']}");
+        try {
+          FirebaseFirestore.instance
+              .collection("Tasks")
+              .doc(widget.taskDetails['id'])
+              .update({
+            "assignedAt": FieldValue.serverTimestamp(),
+            "assignedTo": getUserId()
+          }).then((value) {
+            updateUserActiveTask();
+          });
+        } on FirebaseException catch (e) {
+          print(e.code);
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('You Already Have A Task Running'),
+        ));
+      }
+    });
+  }
+
+  handleApproval(status) {
+    FirebaseFirestore.instance
+        .collection("Tasks")
+        .doc(widget.taskDetails['id'])
+        .update({
+      "Completed": status,
+      "submittedForApproval": status,
+    }).then((value) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: ((context) => AdminPageNavigation())));
+    });
+  }
+
+  getPayments() {
+    FirebaseFirestore.instance
+        .collection("FrameWorks")
+        .doc(widget.taskDetails['frameWork'])
+        .get()
+        .then((doc) {
+      // print(doc.data());
+      List<Map<String, dynamic>> temp = [];
+      // Iterate through each key-value pair in doc.data()
+      doc.data()!.forEach((key, value) {
+        try {
+          print(key);
+          print(
+            widget.taskDetails['TaskData'][key],
+          );
+          if (key == "responsiveness") {
+            temp.add({
+              "title": key,
+              "calls": widget.taskDetails['TaskData'][key] ? "yes" : "no",
+              "price": value,
+              "total": value * (widget.taskDetails['TaskData'][key] ? 1 : 0)
             });
-          } on FirebaseException catch (e) {
-            print(e.code);
+          } else if (key == "TimeFrame") {
+            // Run Nothing For Now
+          } else if (key == "Commit" || key == "TimeFrame") {
+            // Run Nothing For Now
+          } else if (key == "baseAmount") {
+            temp.add(
+                {"title": key, "calls": 1, "price": value, "total": value});
+          } else {
+            temp.add({
+              "title": key,
+              "calls": widget.taskDetails['TaskData']['No$key'],
+              "price": value,
+              "total": value * widget.taskDetails['TaskData']['No$key']
+            });
           }
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text('You Already Have A Task Running'),
-          ));
+          num sumOfTotals = temp.fold(
+              0, (previousValue, map) => previousValue + (map['total'] ?? 0));
+
+          print(sumOfTotals);
+
+          switch (widget.taskDetails['TaskData']['TimeFrame']) {
+            case 'x1':
+              sumOfTotals = sumOfTotals / 1;
+              break;
+            case 'x2':
+              sumOfTotals = sumOfTotals / 2;
+
+              break;
+            case 'x3':
+              sumOfTotals = sumOfTotals / 3;
+
+              break;
+            case 'x4':
+              sumOfTotals = 0;
+              break;
+            default:
+          }
+
+          setState(() {
+            PaymentDetails = temp;
+            TotalPayable = sumOfTotals;
+          });
+        } catch (e) {
+          print(e);
         }
       });
-    }
+      print(temp);
+    });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -62,7 +169,7 @@ class TaskDetail extends StatelessWidget {
           ),
         ),
         title: Text(
-          "${taskDetails["Title"]}",
+          "${widget.taskDetails["Title"]}",
           style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
         ),
       ),
@@ -79,7 +186,7 @@ class TaskDetail extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Text('${taskDetails['Desc']}'),
+              Text('${widget.taskDetails['Desc']}'),
               SizedBox(
                 height: 10,
               ),
@@ -91,7 +198,7 @@ class TaskDetail extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                '${taskDetails['alottedTimeInHours']} Hr',
+                '${widget.taskDetails['alottedTimeInHours']} Hr',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
@@ -106,7 +213,7 @@ class TaskDetail extends StatelessWidget {
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
               ),
               Text(
-                '${taskDetails['difficulty']}',
+                '${widget.taskDetails['difficulty']}',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontFamily: GoogleFonts.inter().fontFamily,
@@ -119,7 +226,7 @@ class TaskDetail extends StatelessWidget {
                 'Frame Work',
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
               ),
-              Text('${taskDetails['frameWork']}'),
+              Text('${widget.taskDetails['frameWork']}'),
               SizedBox(
                 height: 10,
               ),
@@ -127,7 +234,7 @@ class TaskDetail extends StatelessWidget {
                 'Project',
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
               ),
-              Text('${taskDetails['belongsTo']}'),
+              Text('${widget.taskDetails['belongsTo']}'),
               SizedBox(
                 height: 10,
               ),
@@ -135,7 +242,7 @@ class TaskDetail extends StatelessWidget {
                 'Leader',
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
               ),
-              Text('${taskDetails['leadedBy']}'),
+              Text('${widget.taskDetails['leadedBy']}'),
               SizedBox(
                 height: 10,
               ),
@@ -143,28 +250,80 @@ class TaskDetail extends StatelessWidget {
                 'Createed At',
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
               ),
-              Text('${taskDetails['createdAt'].toDate()}'),
+              Text('${widget.taskDetails['createdAt'].toDate()}'),
               SizedBox(
                 height: 20,
               ),
-              getUserType() == "admin"
-                  ? SizedBox()
-                  : Center(
-                      child: ElevatedButton(
-                          onPressed: startTask,
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xff349EFF),
-                              minimumSize: Size(120, 50),
-                              elevation: 0),
-                          child: Text(
-                            "Start",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: GoogleFonts.inter().fontFamily,
-                                color: Colors.white),
-                          )),
-                    ),
+              Visibility(
+                  visible: widget.showTaskData,
+                  child: Column(
+                    children: [
+                      Text(
+                        'Time Frame',
+                        style: TextStyle(
+                            fontSize: 23, fontWeight: FontWeight.w600),
+                      ),
+                      Text('${widget.taskDetails["TaskData"]['TimeFrame']}'),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'GitHub Comit Name',
+                        style: TextStyle(
+                            fontSize: 23, fontWeight: FontWeight.w600),
+                      ),
+                      Text('${widget.taskDetails["TaskData"]['Commit']}'),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Total on the bases of timeframe',
+                        style: TextStyle(
+                            fontSize: 23, fontWeight: FontWeight.w600),
+                      ),
+                      Text('$TotalPayable'),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      ...PaymentDetails.map((e) => Text(
+                          "${e['title']} ${e['calls']} ${e['price']} ${e['total']}")),
+                    ],
+                  )),
+              widget.showApprovalOptions
+                  ? Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            handleApproval(true);
+                          },
+                          child: Text("Aprove"),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            handleApproval(false);
+                          },
+                          child: Text("Reject"),
+                        ),
+                      ],
+                    )
+                  : getUserType() == "admin"
+                      ? SizedBox()
+                      : Center(
+                          child: ElevatedButton(
+                              onPressed: startTask,
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color(0xff349EFF),
+                                  minimumSize: Size(120, 50),
+                                  elevation: 0),
+                              child: Text(
+                                "Start",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: GoogleFonts.inter().fontFamily,
+                                    color: Colors.white),
+                              )),
+                        ),
             ],
           ),
         ),
