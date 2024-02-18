@@ -135,7 +135,7 @@ class _TaskDetailState extends State<TaskDetail> {
 
               break;
             case 'x3':
-              sumOfTotals = sumOfTotals / 3;
+              sumOfTotals = sumOfTotals / 4;
 
               break;
             case 'x4':
