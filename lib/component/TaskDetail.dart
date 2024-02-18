@@ -78,6 +78,7 @@ class _TaskDetailState extends State<TaskDetail> {
         .update({
       "Completed": status,
       "submittedForApproval": status,
+      "panelty": status ? 0 : 100,
     }).then((value) {
       Navigator.push(context,
           MaterialPageRoute(builder: ((context) => AdminPageNavigation())));
@@ -146,7 +147,7 @@ class _TaskDetailState extends State<TaskDetail> {
 
           setState(() {
             PaymentDetails = temp;
-            TotalPayable = sumOfTotals;
+            TotalPayable = sumOfTotals - widget.taskDetails['panelty'];
           });
         } catch (e) {
           print(e);
@@ -273,6 +274,15 @@ class _TaskDetailState extends State<TaskDetail> {
                             fontSize: 23, fontWeight: FontWeight.w600),
                       ),
                       Text('${widget.taskDetails["TaskData"]['Commit']}'),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'other Panelty',
+                        style: TextStyle(
+                            fontSize: 23, fontWeight: FontWeight.w600),
+                      ),
+                      Text("${widget.taskDetails['panelty']}"),
                       SizedBox(
                         height: 20,
                       ),
