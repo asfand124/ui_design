@@ -30,7 +30,7 @@ class UserSetting extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Hi, Asfandyar',
+                              'Hi, Asfandyar khan',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
