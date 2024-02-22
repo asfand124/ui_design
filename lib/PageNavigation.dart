@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui_design/screen/user/Home.dart';
 import 'package:ui_design/screen/user/Profile.dart';
+import 'package:ui_design/screen/user/UserSetting.dart';
 import 'package:ui_design/screen/user/wallet.dart';
 
 class PageNavigation extends StatefulWidget {
@@ -20,9 +21,7 @@ class _PageNavigationState extends State {
     Center(
       child: Text("Contact"),
     ),
-    Center(
-      child: Text("Settings"),
-    ),
+    UserSetting()
   ];
 
   _changeTab(int index) {
@@ -34,7 +33,7 @@ class _PageNavigationState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 252, 237, 192),
+      backgroundColor: Color(0xffdddaff),
       body: SafeArea(child: _pages[_selectedTab]),
       bottomNavigationBar: Theme(
         data: ThemeData(

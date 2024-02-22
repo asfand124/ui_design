@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_fonts/google_fonts.dart';
 // import 'package:ui_design/screen/Home.dart';
 import 'package:ui_design/Authentication/Signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -74,47 +75,100 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF1F0F0),
       appBar: AppBar(
-        title: Text("data"),
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back,
-          ),
-        ),
+        backgroundColor: Color(0xffF1F0F0),
+        title: Center(child: Text("Login")),
+        // leading: InkWell(
+        //   onTap: () {
+        //     Navigator.pop(context);
+        //   },
+        //   child: Icon(
+        //     Icons.arrow_back,
+        //   ),
+        // ),
       ),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter Your email',
-              ),
-              controller: _email,
+      body:
+       SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10,right: 10),
+          child: SingleChildScrollView(
+            child: Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 20,),
+                Text('Login',
+                style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,fontFamily: GoogleFonts.inter().fontFamily),),
+                SizedBox(height: 10,),
+            
+                Text('Sta updated on yourbprofessional world',
+                style: TextStyle(color: Color(0xff349EFF),fontFamily: GoogleFonts.cambo().fontFamily),),
+                SizedBox(
+                  height: 50,
+                ),
+                Container(
+                  height: 350,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15,right: 15),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)
+                            ),
+                            hintText: 'Enter Your email',
+                            hintStyle: TextStyle(color: Color(0xff349EFF),fontSize: 15),
+                            label: Text('Email')
+                          ),
+                          controller: _email,
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)
+                            ),
+                            hintText: 'Enter Your pass',
+                             hintStyle: TextStyle(color: Color(0xff349EFF),fontSize: 15),
+                            label: Text('Password'),
+                          ),
+                          controller: _pass,
+                        ),SizedBox(height: 10,),
+                        Row(
+                          children: [
+                            Text('Forget Pasword?',style: TextStyle(color: Color(0xff349EFF)),),
+                          ],
+                        ),
+
+                        SizedBox(
+                          height: 30,
+                        ),
+                        ElevatedButton(
+                          onPressed: Signin,
+                          style: ElevatedButton.styleFrom(
+                          backgroundColor:Color(0xff349EFF),
+                          minimumSize: Size(220, 50),
+                          
+                          textStyle: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
+                          child: Text("Login",style: TextStyle(color: Colors.white),),
+                        ),
+                        // ElevatedButton(onPressed: Signup, child: Text("signup"))
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: 30,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter Your pass',
-              ),
-              controller: _pass,
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            ElevatedButton(
-              onPressed: Signin,
-              child: Text("Login"),
-            ),
-            // ElevatedButton(onPressed: Signup, child: Text("signup"))
-          ],
+          ),
         ),
       ),
     );
