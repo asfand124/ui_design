@@ -88,43 +88,55 @@ class _LoginState extends State<Login> {
         //   ),
         // ),
       ),
-      body:
-       SafeArea(
+      body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 10,right: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           child: SingleChildScrollView(
             child: Column(
-             crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 20,),
-                Text('Login',
-                style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,fontFamily: GoogleFonts.inter().fontFamily),),
-                SizedBox(height: 10,),
-            
-                Text('Sta updated on yourbprofessional world',
-                style: TextStyle(color: Color(0xff349EFF),fontFamily: GoogleFonts.cambo().fontFamily),),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Login',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: GoogleFonts.inter().fontFamily),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Stay updated on yourbprofessional world',
+                  style: TextStyle(
+                      color: Color(0xff349EFF),
+                      fontFamily: GoogleFonts.cambo().fontFamily),
+                ),
                 SizedBox(
                   height: 50,
                 ),
                 Container(
                   height: 350,
                   width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 15,right: 15),
+                    padding: const EdgeInsets.only(left: 15, right: 15),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextField(
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)
-                            ),
-                            hintText: 'Enter Your email',
-                            hintStyle: TextStyle(color: Color(0xff349EFF),fontSize: 15),
-                            label: Text('Email')
-                          ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              hintText: 'Enter Your email',
+                              hintStyle: TextStyle(
+                                  color: Color(0xff349EFF), fontSize: 15),
+                              label: Text('Email')),
                           controller: _email,
                         ),
                         SizedBox(
@@ -133,17 +145,23 @@ class _LoginState extends State<Login> {
                         TextField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)
-                            ),
+                                borderRadius: BorderRadius.circular(10)),
                             hintText: 'Enter Your pass',
-                             hintStyle: TextStyle(color: Color(0xff349EFF),fontSize: 15),
+                            hintStyle: TextStyle(
+                                color: Color(0xff349EFF), fontSize: 15),
                             label: Text('Password'),
                           ),
                           controller: _pass,
-                        ),SizedBox(height: 10,),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Row(
                           children: [
-                            Text('Forget Pasword?',style: TextStyle(color: Color(0xff349EFF)),),
+                            Text(
+                              'Forget Pasword?',
+                              style: TextStyle(color: Color(0xff349EFF)),
+                            ),
                           ],
                         ),
 
@@ -153,13 +171,14 @@ class _LoginState extends State<Login> {
                         ElevatedButton(
                           onPressed: Signin,
                           style: ElevatedButton.styleFrom(
-                          backgroundColor:Color(0xff349EFF),
-                          minimumSize: Size(220, 50),
-                          
-                          textStyle: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold)),
-                          child: Text("Login",style: TextStyle(color: Colors.white),),
+                              backgroundColor: Color(0xff349EFF),
+                              minimumSize: Size(220, 50),
+                              textStyle: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                          child: Text(
+                            "Login",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                         // ElevatedButton(onPressed: Signup, child: Text("signup"))
                       ],
