@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_design/component/Task.dart';
 import 'package:ui_design/component/UpComingTasks.dart';
+import 'package:ui_design/component/employeetask.dart';
 
 import 'package:ui_design/component/notification.dart';
 import 'package:ui_design/screen/admin/Addtask.dart';
@@ -97,22 +98,70 @@ class _AdminHomeState extends State<AdminHome> {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 70,
             ),
+            Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "All Team",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                )),
             Column(
               children: _employeeList
-                  .map((emp) => Row(
-                        children: [
-                          Text("${emp["Name"]}"),
-                          Container(
-                            height: 10,
-                            width: 10,
-                            color: emp["activeTask"] == ""
-                                ? Colors.blue
-                                : Colors.red,
-                          )
-                          // Image.network("${emp["imgUrl"]}")
-                        ],
+                  .map((emp) => Padding(
+                        padding: const EdgeInsets.all(8.8),
+                        child: Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            EmployeeTaskdetail(data: emp)));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Color(0xffDDDFFF),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.5),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                          "${emp["imgUrl"]}",
+                                        ),
+                                      ),
+                                      Text(
+                                        "${emp["Name"]}",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      emp["activeTask"] == ""
+                                          ? Text(
+                                              "Assigned",
+                                              style: TextStyle(
+                                                  color: Colors.green,
+                                                  fontWeight: FontWeight.w600),
+                                            )
+                                          : Text(
+                                              "No Task",
+                                              style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight.w600),
+                                            )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                            // Image.network("${emp["imgUrl"]}")
+                          ],
+                        ),
                       ))
                   .toList(),
             )
