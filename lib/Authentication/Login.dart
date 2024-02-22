@@ -75,19 +75,8 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF1F0F0),
-      appBar: AppBar(
-        backgroundColor: Color(0xffF1F0F0),
-        title: Center(child: Text("Login")),
-        // leading: InkWell(
-        //   onTap: () {
-        //     Navigator.pop(context);
-        //   },
-        //   child: Icon(
-        //     Icons.arrow_back,
-        //   ),
-        // ),
-      ),
+        backgroundColor: Color(0xffDDDAFF),
+     
       body:
        SafeArea(
         child: Padding(
@@ -96,74 +85,75 @@ class _LoginState extends State<Login> {
             child: Column(
              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(image: AssetImage('assets/Logo.png'),)
+                  ),
+                ),
                 SizedBox(height: 20,),
-                Text('Login',
-                style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,fontFamily: GoogleFonts.inter().fontFamily),),
+                Text(' Welcome Back',
+                style: TextStyle(fontSize: 28,fontWeight: FontWeight.w600,fontFamily: GoogleFonts.poppins().fontFamily),),
                 SizedBox(height: 10,),
             
-                Text('Sta updated on yourbprofessional world',
-                style: TextStyle(color: Color(0xff349EFF),fontFamily: GoogleFonts.cambo().fontFamily),),
+                Text(' Hey good to see you agin',
+                style: TextStyle(color: Colors.grey,fontFamily: GoogleFonts.cambo().fontFamily),),
                 SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
-                Container(
-                  height: 350,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 15,right: 15),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)
-                            ),
-                            hintText: 'Enter Your email',
-                            hintStyle: TextStyle(color: Color(0xff349EFF),fontSize: 15),
-                            label: Text('Email')
-                          ),
-                          controller: _email,
+                Padding(
+                  padding: const EdgeInsets.only(left: 15,right: 15),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                        //  prefix: Icon(Icons.email,color: Colors.black,),
+                          hintText: 'Enter Your email',
+                          hintStyle: TextStyle(color: Color(0xff349EFF),fontSize: 15),
+                          label: Text('Email')
                         ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)
-                            ),
-                            hintText: 'Enter Your pass',
-                             hintStyle: TextStyle(color: Color(0xff349EFF),fontSize: 15),
-                            label: Text('Password'),
-                          ),
-                          controller: _pass,
-                        ),SizedBox(height: 10,),
-                        Row(
-                          children: [
-                            Text('Forget Pasword?',style: TextStyle(color: Color(0xff349EFF)),),
-                          ],
-                        ),
-
-                        SizedBox(
-                          height: 30,
-                        ),
-                        ElevatedButton(
-                          onPressed: Signin,
-                          style: ElevatedButton.styleFrom(
-                          backgroundColor:Color(0xff349EFF),
-                          minimumSize: Size(220, 50),
+                        controller: _email,
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
                           
-                          textStyle: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold)),
-                          child: Text("Login",style: TextStyle(color: Colors.white),),
+                          hintText: 'Enter Your pass',
+                           hintStyle: TextStyle(color: Color(0xff349EFF),fontSize: 15),
+                          label: Text('Password'),
                         ),
-                        // ElevatedButton(onPressed: Signup, child: Text("signup"))
-                      ],
-                    ),
+                        controller: _pass,
+                      ),SizedBox(height: 10,),
+                      
+                        
+                
+                      SizedBox(
+                        height: 30,
+                      ),
+                      ElevatedButton(
+                        onPressed: Signin,
+                        style: ElevatedButton.styleFrom(
+                        backgroundColor:Color(0xff821DFB),
+                        minimumSize: Size(220, 50),
+                        
+                        textStyle: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)),
+                        child: Text("Authenticate",style: TextStyle(color: Colors.white),),
+                      ),
+                      // ElevatedButton(onPressed: Signup, child: Text("signup"))
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Center(
+                        child: 
+                        Text('Need Help ?',style: TextStyle(fontWeight: FontWeight.w600,fontFamily: GoogleFonts.poppins().fontFamily),),
+                      ),
+                    ],
                   ),
                 ),
               ],
