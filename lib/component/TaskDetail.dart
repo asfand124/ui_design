@@ -160,7 +160,9 @@ class _TaskDetailState extends State<TaskDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffdddaff),
       appBar: AppBar(
+        backgroundColor: Color(0xffdddaff) ,
         leading: InkWell(
           onTap: () {
             Navigator.pop(context);
@@ -180,10 +182,28 @@ class _TaskDetailState extends State<TaskDetail> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Discription',
-                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+              Container(
+                 padding: EdgeInsets.only(left: 15),
+              height: MediaQuery.of(context).size.height*0.44 ,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+
               ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                height: 10,
+              ),
+                    Text(
+                'Discription',
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w700,
+                fontFamily: GoogleFonts.karma().fontFamily
+),
+              ),
+
               SizedBox(
                 height: 10,
               ),
@@ -191,7 +211,50 @@ class _TaskDetailState extends State<TaskDetail> {
               SizedBox(
                 height: 10,
               ),
-              Text(
+               Text(
+                'Detail Discription',
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w700,
+                fontFamily: GoogleFonts.karma().fontFamily
+),
+              ),
+                 SizedBox(
+                      height: 20,
+                    ),
+                    Text('He said this while launching the Final Year Design Project Financing held at University of Agriculture, Faisalabad. Pakistan Engineering Council has funded 593 projects for 2023-24 among students of more than 100 universities across the country.',
+               ),
+              
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+             Container(
+              padding: EdgeInsets.only(left: 15),
+              height: MediaQuery.of(context).size.height*0.44,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                    Center(
+                      child: Text(
+                                      'Frame work',
+                                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600,
+                                      fontFamily: GoogleFonts.karma().fontFamily),
+                                    ),
+                    ),
+                   SizedBox(
+                height: 10,
+              ),
+                   Text(
                 'Time for task',
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
               ),
@@ -231,7 +294,40 @@ class _TaskDetailState extends State<TaskDetail> {
               SizedBox(
                 height: 10,
               ),
-              Text(
+                ],
+              ),
+             ),
+                SizedBox(
+                height: 30,
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 15),
+              height: MediaQuery.of(context).size.height*0.43,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+
+              ),
+
+
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                     SizedBox(
+                    height: 10,
+                  ),
+                    Center(
+                      child: Text(
+                                      'Project Detail',
+                                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600,
+                                      fontFamily: GoogleFonts.karma().fontFamily),
+                                    ),
+                    ),
+                       SizedBox(
+                height: 10,
+              ),
+                    Text(
                 'Project',
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
               ),
@@ -252,6 +348,47 @@ class _TaskDetailState extends State<TaskDetail> {
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
               ),
               Text('${widget.taskDetails['createdAt'].toDate()}'),
+              SizedBox(
+                height: 20,
+              ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+//               Container(
+//                  padding: EdgeInsets.only(left: 15),
+//               height:MediaQuery.of(context).size.height*0.33,
+//               width: MediaQuery.of(context).size.width,
+//               decoration: BoxDecoration(
+//                 borderRadius: BorderRadius.circular(10),
+//                           color: Colors.white,
+
+//               ),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                       SizedBox(
+//                       height: 10,
+//                     ),
+//                      Text(
+//                 'Detail Discription',
+//                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w700,
+//                 fontFamily: GoogleFonts.karma().fontFamily
+// ),
+//               ),
+//                     SizedBox(
+//                       height: 20,
+//                     ),
+//                     Text('He said this while launching the Final Year Design Project Financing held at University of Agriculture, Faisalabad. Pakistan Engineering Council has funded 593 projects for 2023-24 among students of more than 100 universities across the country.',
+//                 style: TextStyle( fontWeight: FontWeight.w700,
+//                 fontFamily: GoogleFonts.karma().fontFamily
+// ),),
+
+//                   ],
+//                 ),
+//               ),
               SizedBox(
                 height: 20,
               ),
@@ -333,6 +470,9 @@ class _TaskDetailState extends State<TaskDetail> {
                                     fontFamily: GoogleFonts.inter().fontFamily,
                                     color: Colors.white),
                               )),
+                        ),
+                        SizedBox(
+                          height: 20,
                         ),
             ],
           ),

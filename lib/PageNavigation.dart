@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui_design/screen/user/Contact.dart';
 import 'package:ui_design/screen/user/Home.dart';
 import 'package:ui_design/screen/user/Profile.dart';
 import 'package:ui_design/screen/user/UserSetting.dart';
@@ -18,10 +19,8 @@ class _PageNavigationState extends State {
     Home(),
     Wallet(),
     Profile(),
-    Center(
-      child: Text("Contact"),
-    ),
-    UserSetting()
+  Contact(),
+    UserSetting(),
   ];
 
   _changeTab(int index) {
