@@ -38,19 +38,22 @@ class _AproveTaksState extends State<AproveTaks> {
   }
 
   Widget build(BuildContext context) {
-    return Column(
-      children: unApprovedTasks
-          .map((task) => ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => TaskDetail(
-                          taskDetails: task,
-                          showTaskData: true,
-                          showApprovalOptions: true,
-                        )));
-              },
-              child: Text("${task['Title']}")))
-          .toList(),
+    return Scaffold(
+      backgroundColor: Color(0xffDDDFFF),
+      body: Column(
+        children: unApprovedTasks
+            .map((task) => ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => TaskDetail(
+                            taskDetails: task,
+                            showTaskData: true,
+                            showApprovalOptions: true,
+                          )));
+                },
+                child: Text("${task['Title']}")))
+            .toList(),
+      ),
     );
   }
 }

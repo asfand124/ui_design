@@ -17,6 +17,7 @@ dependencies:
   toggle_switch: ^2.1.0
   timer_builder: ^2.0.0
   flutter_easyloading: ^3.0.5
+  pie_chart: ^5.4.0
 
 dev_dependencies:
   flutter_test:

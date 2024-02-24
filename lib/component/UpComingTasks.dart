@@ -5,11 +5,21 @@ import 'TaskDetail.dart';
 import '../screen/user/Nextpage.dart';
 import 'notification.dart';
 
-class UpcomingTasks extends StatelessWidget {
+class UpcomingTasks extends StatefulWidget {
   final List<Map<String, dynamic>> dataStream;
 
   UpcomingTasks({super.key, required this.dataStream});
+
+  @override
+  State<UpcomingTasks> createState() => _UpcomingTasksState();
+}
+
+class _UpcomingTasksState extends State<UpcomingTasks> {
   // final List<Map<String, dynamic>> availableTasks = dataStream;
+
+  getData() {
+    print(widget.dataStream);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +59,7 @@ class UpcomingTasks extends StatelessWidget {
                         ),
                       );
                     },
-                    child: notification(notifi:"${dataStream.length}"),
+                    child: notification(notifi: "${widget.dataStream.length}"),
                   ),
                 ],
               ),
@@ -61,7 +71,7 @@ class UpcomingTasks extends StatelessWidget {
             height: 300,
             child: PageView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: dataStream.length,
+              itemCount: widget.dataStream.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   margin: EdgeInsets.all(20),
@@ -70,7 +80,7 @@ class UpcomingTasks extends StatelessWidget {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) =>
-                              TaskDetail(taskDetails: dataStream[index]),
+                              TaskDetail(taskDetails: widget.dataStream[index]),
                         ),
                       );
                     },
@@ -96,12 +106,13 @@ class UpcomingTasks extends StatelessWidget {
                                       backgroundColor: Color(0xffF1F0FE),
                                       minimumSize: Size(120, 35),
                                       elevation: 0),
-                                  child: Text("${dataStream[index]["frameWork"]}")),
+                                  child: Text(
+                                      "${widget.dataStream[index]["frameWork"]}")),
                               SizedBox(
                                 height: 10,
                               ),
                               Text(
-                                '${dataStream[index]["Title"]}',
+                                '${widget.dataStream[index]["Title"]}',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
@@ -111,10 +122,10 @@ class UpcomingTasks extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              // Text("${dataStream[index]["Desc"]}"),
-                              // SizedBox(
-                              //   height: 10,
-                              // ),
+                              Text("${widget.dataStream[index]["Desc"]}"),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -142,8 +153,8 @@ class UpcomingTasks extends StatelessWidget {
                                         width: 5,
                                       ),
                                       Text(
-                                        "${dataStream[index]["alottedTimeInHours"]} Hrs",
-                                       // "Time",
+                                        "${widget.dataStream[index]["alottedTimeInHours"]} Hrs",
+                                        // "Time",
                                         style: TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w600,
@@ -154,13 +165,13 @@ class UpcomingTasks extends StatelessWidget {
                                     ],
                                   ),
                                   ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: getData,
                                       style: ElevatedButton.styleFrom(
                                           backgroundColor: Color(0xff349EFF),
                                           minimumSize: Size(120, 30),
                                           elevation: 0),
                                       child: Text(
-                                        "${dataStream[index]["difficulty"]}",
+                                        "${widget.dataStream[index]["difficulty"]}",
                                         style: TextStyle(
                                             fontSize: 10,
                                             fontWeight: FontWeight.w400,
@@ -189,30 +200,32 @@ class UpcomingTasks extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 10, right: 10),
-                                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [                                       
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
                                         Column(
-                                          children: [  
+                                          children: [
                                             Text(
                                               'Leader',
                                               style: TextStyle(
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.w400,
-                                                fontFamily:
-                                                    GoogleFonts.inter().fontFamily,
+                                                fontFamily: GoogleFonts.inter()
+                                                    .fontFamily,
                                               ),
-                                            ),                                          
+                                            ),
                                             Text(
-                                              '${dataStream[index]["leadedBy"]}',
+                                              '${widget.dataStream[index]["leadedBy"]}',
                                               style: TextStyle(
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.w400,
-                                                fontFamily:
-                                                    GoogleFonts.inter().fontFamily,
+                                                fontFamily: GoogleFonts.inter()
+                                                    .fontFamily,
                                               ),
                                             ),
                                           ],
-                                        ),                                       
+                                        ),
                                         Container(
                                           height: 20,
                                           width: 1,
@@ -222,23 +235,23 @@ class UpcomingTasks extends StatelessWidget {
                                           width: 4,
                                         ),
                                         Column(
-                                          children: [ 
+                                          children: [
                                             Text(
                                               'project',
                                               style: TextStyle(
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.w400,
-                                                fontFamily:
-                                                    GoogleFonts.inter().fontFamily,
+                                                fontFamily: GoogleFonts.inter()
+                                                    .fontFamily,
                                               ),
-                                            ),                                           
-                                                Text(
-                                              '${dataStream[index]["belongsTo"]}',
+                                            ),
+                                            Text(
+                                              '${widget.dataStream[index]["belongsTo"]}',
                                               style: TextStyle(
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.w400,
-                                                fontFamily:
-                                                    GoogleFonts.inter().fontFamily,
+                                                fontFamily: GoogleFonts.inter()
+                                                    .fontFamily,
                                               ),
                                             ),
                                           ],

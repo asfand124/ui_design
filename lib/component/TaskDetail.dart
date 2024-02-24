@@ -162,7 +162,7 @@ class _TaskDetailState extends State<TaskDetail> {
     return Scaffold(
       backgroundColor: Color(0xffdddaff),
       appBar: AppBar(
-        backgroundColor: Color(0xffdddaff) ,
+        backgroundColor: Color(0xffdddaff),
         leading: InkWell(
           onTap: () {
             Navigator.pop(context);
@@ -183,174 +183,180 @@ class _TaskDetailState extends State<TaskDetail> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                 padding: EdgeInsets.only(left: 15),
-              height: MediaQuery.of(context).size.height*0.44 ,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-
-              ),
+                padding: EdgeInsets.only(left: 15),
+                height: MediaQuery.of(context).size.height * 0.40,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                height: 10,
-              ),
+                      height: 10,
+                    ),
                     Text(
-                'Discription',
-                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w700,
-                fontFamily: GoogleFonts.karma().fontFamily
-),
-              ),
-
-              SizedBox(
-                height: 10,
-              ),
-              Text('${widget.taskDetails['Desc']}'),
-              SizedBox(
-                height: 10,
-              ),
-               Text(
-                'Detail Discription',
-                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w700,
-                fontFamily: GoogleFonts.karma().fontFamily
-),
-              ),
-                 SizedBox(
+                      'Discription',
+                      style: TextStyle(
+                          fontSize: 23,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: GoogleFonts.karma().fontFamily),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text('${widget.taskDetails['Desc']}'),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Detail Discription',
+                      style: TextStyle(
+                          fontSize: 23,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: GoogleFonts.karma().fontFamily),
+                    ),
+                    SizedBox(
                       height: 20,
                     ),
-                    Text('He said this while launching the Final Year Design Project Financing held at University of Agriculture, Faisalabad. Pakistan Engineering Council has funded 593 projects for 2023-24 among students of more than 100 universities across the country.',
-               ),
-              
+                    Text(
+                      'He said this while launching the Final Year Design Project Financing held at University of Agriculture, Faisalabad. Pakistan Engineering Council has funded 593 projects for 2023-24 among students of more than 100 universities across the country.',
+                    ),
                   ],
                 ),
               ),
               SizedBox(
                 height: 30,
               ),
-             Container(
-              padding: EdgeInsets.only(left: 15),
-              height: MediaQuery.of(context).size.height*0.44,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 10,
-                  ),
+              Container(
+                padding: EdgeInsets.only(left: 15),
+                height: MediaQuery.of(context).size.height * 0.35,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
                     Center(
                       child: Text(
-                                      'Frame work',
-                                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600,
-                                      fontFamily: GoogleFonts.karma().fontFamily),
-                                    ),
+                        'Frame work',
+                        style: TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: GoogleFonts.karma().fontFamily),
+                      ),
                     ),
-                   SizedBox(
-                height: 10,
-              ),
-                   Text(
-                'Time for task',
-                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text(
-                '${widget.taskDetails['alottedTimeInHours']} Hr',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: GoogleFonts.inter().fontFamily,
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Time for task',
+                      style:
+                          TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      '${widget.taskDetails['alottedTimeInHours']} Hr',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: GoogleFonts.inter().fontFamily,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'State',
+                      style:
+                          TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      '${widget.taskDetails['difficulty']}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontFamily: GoogleFonts.inter().fontFamily,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Frame Work',
+                      style:
+                          TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                    ),
+                    Text('${widget.taskDetails['frameWork']}'),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
-                height: 10,
-              ),
-              Text(
-                'State',
-                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
-              ),
-              Text(
-                '${widget.taskDetails['difficulty']}',
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontFamily: GoogleFonts.inter().fontFamily,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Frame Work',
-                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
-              ),
-              Text('${widget.taskDetails['frameWork']}'),
-              SizedBox(
-                height: 10,
-              ),
-                ],
-              ),
-             ),
-                SizedBox(
                 height: 30,
               ),
               Container(
                 padding: EdgeInsets.only(left: 15),
-              height: MediaQuery.of(context).size.height*0.43,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-
-              ),
-
-
+                height: MediaQuery.of(context).size.height * 0.35,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     SizedBox(
-                    height: 10,
-                  ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Center(
                       child: Text(
-                                      'Project Detail',
-                                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600,
-                                      fontFamily: GoogleFonts.karma().fontFamily),
-                                    ),
+                        'Project Detail',
+                        style: TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: GoogleFonts.karma().fontFamily),
+                      ),
                     ),
-                       SizedBox(
-                height: 10,
-              ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Text(
-                'Project',
-                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
-              ),
-              Text('${widget.taskDetails['belongsTo']}'),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Leader',
-                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
-              ),
-              Text('${widget.taskDetails['leadedBy']}'),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Createed At',
-                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
-              ),
-              Text('${widget.taskDetails['createdAt'].toDate()}'),
-              SizedBox(
-                height: 20,
-              ),
+                      'Project',
+                      style:
+                          TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                    ),
+                    Text('${widget.taskDetails['belongsTo']}'),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Leader',
+                      style:
+                          TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                    ),
+                    Text('${widget.taskDetails['leadedBy']}'),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Createed At',
+                      style:
+                          TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                    ),
+                    Text('${widget.taskDetails['createdAt'].toDate()}'),
+                    SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),
@@ -401,7 +407,7 @@ class _TaskDetailState extends State<TaskDetail> {
                         style: TextStyle(
                             fontSize: 23, fontWeight: FontWeight.w600),
                       ),
-                      Text('${widget.taskDetails["TaskData"]['TimeFrame']}'),
+                      // Text('${widget.taskDetails["TaskData"]['TimeFrame']}'),
                       SizedBox(
                         height: 20,
                       ),
@@ -410,7 +416,8 @@ class _TaskDetailState extends State<TaskDetail> {
                         style: TextStyle(
                             fontSize: 23, fontWeight: FontWeight.w600),
                       ),
-                      Text('${widget.taskDetails["TaskData"]['Commit']}'),
+
+                      ///  Text('${widget.taskDetails["TaskData"]['Commit']}'),
                       SizedBox(
                         height: 20,
                       ),
@@ -471,9 +478,9 @@ class _TaskDetailState extends State<TaskDetail> {
                                     color: Colors.white),
                               )),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
+              SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),
