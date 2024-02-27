@@ -105,7 +105,7 @@ class _LoginState extends State<Login> {
                   height: 10,
                 ),
                 Text(
-                  ' Hey good to see you agin',
+                  ' Hey good to see you again',
                   style: TextStyle(
                       color: Colors.grey,
                       fontFamily: GoogleFonts.cambo().fontFamily),
@@ -160,7 +160,7 @@ class _LoginState extends State<Login> {
                       ),
                       // ElevatedButton(onPressed: Signup, child: Text("signup"))
                       SizedBox(
-                        height: 8,
+                        height: 14,
                       ),
                       Center(
                         child: Text(

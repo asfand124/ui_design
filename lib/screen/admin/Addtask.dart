@@ -114,6 +114,9 @@ class _AddTaskState extends State<AddTask> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text("Add Task")),
+      ),
       backgroundColor: Color(0xfffDDDFFF),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -121,8 +124,17 @@ class _AddTaskState extends State<AddTask> {
             padding:
                 const EdgeInsets.only(top: 20, right: 10, left: 10, bottom: 20),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(
+                  "Task Title:",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 TextField(
                   controller: titleController,
                   decoration: InputDecoration(
@@ -134,7 +146,15 @@ class _AddTaskState extends State<AddTask> {
                   ),
                 ),
                 SizedBox(
-                  height: 8,
+                  height: 10,
+                ),
+                Text(
+                  "Task Description:",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 TextField(
                   controller: descrController,
@@ -161,7 +181,8 @@ class _AddTaskState extends State<AddTask> {
 
                 // timer for Hour set
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
+                  width: double.infinity,
+                  // MediaQuery.of(context).size.width * 0.5,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(color: Colors.grey)),
@@ -214,7 +235,8 @@ class _AddTaskState extends State<AddTask> {
                 // Framework dropdown
                 Container(
                   color: Colors.white,
-                  width: MediaQuery.of(context).size.width * 0.5,
+                  width: double.infinity,
+                  //  MediaQuery.of(context).size.width * 0.5,
                   child: DropdownMenu<String>(
                     width: MediaQuery.of(context).size.width * 0.5,
                     initialSelection: framework.first,

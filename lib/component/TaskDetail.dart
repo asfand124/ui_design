@@ -401,63 +401,120 @@ class _TaskDetailState extends State<TaskDetail> {
               ),
               Visibility(
                   visible: widget.showTaskData,
-                  child: Column(
-                    children: [
-                      Text(
-                        'Time Frame',
-                        style: TextStyle(
-                            fontSize: 23, fontWeight: FontWeight.w600),
-                      ),
-                      // Text('${widget.taskDetails["TaskData"]['TimeFrame']}'),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'GitHub Comit Name',
-                        style: TextStyle(
-                            fontSize: 23, fontWeight: FontWeight.w600),
-                      ),
-
-                      ///  Text('${widget.taskDetails["TaskData"]['Commit']}'),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'other Panelty',
-                        style: TextStyle(
-                            fontSize: 23, fontWeight: FontWeight.w600),
-                      ),
-                      Text("${widget.taskDetails['panelty']}"),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Total on the bases of timeframe',
-                        style: TextStyle(
-                            fontSize: 23, fontWeight: FontWeight.w600),
-                      ),
-                      Text('$TotalPayable'),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      ...PaymentDetails.map((e) => Text(
-                          "${e['title']} ${e['calls']} ${e['price']} ${e['total']}")),
-                    ],
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        left: 15, bottom: 20, top: 20, right: 15),
+                    //   height: MediaQuery.of(context).size.height * 0.35,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Time Frame',
+                          style: TextStyle(
+                              fontSize: 23, fontWeight: FontWeight.w600),
+                        ),
+                        // Text('${widget.taskDetails["TaskData"]['TimeFrame']}'),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'GitHub Comit Name',
+                          style: TextStyle(
+                              fontSize: 23, fontWeight: FontWeight.w600),
+                        ),
+                        // Text('${widget.taskDetails["TaskData"]['Commit']}'),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Other Panelty',
+                          style: TextStyle(
+                              fontSize: 23, fontWeight: FontWeight.w600),
+                        ),
+                        Text("${widget.taskDetails['panelty']}"),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Total on the bases of timeframe',
+                          style: TextStyle(
+                              fontSize: 23, fontWeight: FontWeight.w600),
+                        ),
+                        Text('$TotalPayable'),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ...PaymentDetails.map((e) => Container(
+                            padding: EdgeInsets.all(10),
+                            margin: EdgeInsets.only(bottom: 10),
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height * 0.12,
+                            decoration: BoxDecoration(
+                                color: Colors.grey.withOpacity(.1),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${e['title']} ",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text("In Project: " + "${e['calls']}"),
+                                Text("Price Per: " + "${e['price']}"),
+                                Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Text(
+                                      "Total: " + "${e['total']}",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                //  ${e['calls']} Price Per ${e['price']} Total :  ${e['total']}
+                              ],
+                            ))),
+                      ],
+                    ),
                   )),
+              SizedBox(
+                height: 10,
+              ),
               widget.showApprovalOptions
                   ? Row(
                       children: [
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.lightGreen,
+                          ),
                           onPressed: () {
                             handleApproval(true);
                           },
-                          child: Text("Aprove"),
+                          child: Text(
+                            "Aprove",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.redAccent,
+                          ),
                           onPressed: () {
                             handleApproval(false);
                           },
-                          child: Text("Reject"),
+                          child: Text(
+                            "Reject",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ],
                     )

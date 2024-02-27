@@ -39,19 +39,69 @@ class _AproveTaksState extends State<AproveTaks> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            "Task's For Graded",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
       backgroundColor: Color(0xffDDDFFF),
       body: Column(
         children: unApprovedTasks
-            .map((task) => ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => TaskDetail(
-                            taskDetails: task,
-                            showTaskData: true,
-                            showApprovalOptions: true,
-                          )));
-                },
-                child: Text("${task['Title']}")))
+            .map((task) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => TaskDetail(
+                                    taskDetails: task,
+                                    showTaskData: true,
+                                    showApprovalOptions: true,
+                                  )));
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)),
+                          height: MediaQuery.of(context).size.height * 0.08,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                "${task['Title']}",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  "${task['paid'] == false ? "Unpaid" : "Paid"}"),
+                              Text(
+                                "${task['belongsTo']}",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                      //  ElevatedButton(
+                      //     onPressed: () {
+                      //       Navigator.of(context).push(MaterialPageRoute(
+                      //           builder: (context) => TaskDetail(
+                      //                 taskDetails: task,
+                      //                 showTaskData: true,
+                      //                 showApprovalOptions: true,
+                      //               )));
+                      //     },
+                      //     child: Text("${task['Title']}")),
+                    ],
+                  ),
+                ))
             .toList(),
       ),
     );

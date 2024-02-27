@@ -20,9 +20,6 @@ class _AdminPageNavigationState extends State {
     AdminHome(),
     AddTask(),
     AproveTaks(),
-    Center(
-      child: Text("Contact"),
-    ),
   ];
 
   _changeTab(int index) {
@@ -47,12 +44,24 @@ class _AdminPageNavigationState extends State {
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.task), label: "About"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.wallet_rounded), label: "Product"),
+                icon: Icon(
+                  Icons.home,
+                  color: Colors.white,
+                ),
+                label: "Home"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.contact_mail), label: "Contact"),
+                icon: Icon(
+                  Icons.add_task,
+                  color: Colors.white,
+                ),
+                label: "Add Task"),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.grade,
+                  color: Colors.white,
+                ),
+                label: "Grade"),
           ],
         ),
       ),
