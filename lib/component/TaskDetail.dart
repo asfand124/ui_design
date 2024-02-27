@@ -8,6 +8,7 @@ import 'package:ui_design/logics/User.dart';
 class TaskDetail extends StatefulWidget {
   final Map<String, dynamic> taskDetails;
   final bool showTaskData;
+
   final bool showApprovalOptions;
   const TaskDetail(
       {super.key,
@@ -344,12 +345,12 @@ class _TaskDetailState extends State<TaskDetail> {
                       style:
                           TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
                     ),
-                    Text('${widget.taskDetails['leadedBy']}'),
+                    Text('${widget.taskDetails['leadby']}'),
                     SizedBox(
                       height: 10,
                     ),
                     Text(
-                      'Createed At',
+                      'Created At',
                       style:
                           TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
                     ),
