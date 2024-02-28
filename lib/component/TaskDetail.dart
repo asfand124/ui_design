@@ -509,7 +509,7 @@ class _TaskDetailState extends State<TaskDetail> {
                             primary: Colors.redAccent,
                           ),
                           onPressed: () {
-                            handleApproval(false);
+                            handleApproval(true);
                           },
                           child: Text(
                             "Reject",

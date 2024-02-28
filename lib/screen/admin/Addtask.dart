@@ -124,8 +124,8 @@ class _AddTaskState extends State<AddTask> {
             padding:
                 const EdgeInsets.only(top: 20, right: 10, left: 10, bottom: 20),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   "Task Title:",
@@ -138,10 +138,10 @@ class _AddTaskState extends State<AddTask> {
                 TextField(
                   controller: titleController,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(borderSide: BorderSide.none),
                     hintText: 'Task Title',
                     label: Text("Task Title"),
-                    fillColor: Colors.white,
+                    fillColor: Colors.grey.shade100,
                     filled: true,
                   ),
                 ),
@@ -159,10 +159,10 @@ class _AddTaskState extends State<AddTask> {
                 TextField(
                   controller: descrController,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(borderSide: BorderSide.none),
                     hintText: 'Task Discription',
                     label: Text("Task Discription"),
-                    fillColor: Colors.white,
+                    fillColor: Colors.grey.shade100,
                     filled: true,
                   ),
                 ),
@@ -181,10 +181,11 @@ class _AddTaskState extends State<AddTask> {
 
                 // timer for Hour set
                 Container(
-                  width: double.infinity,
-                  // MediaQuery.of(context).size.width * 0.5,
+                  width:
+                      //double.infinity,
+                      MediaQuery.of(context).size.width * 0.8,
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.grey.shade100,
                       border: Border.all(color: Colors.grey)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -236,11 +237,10 @@ class _AddTaskState extends State<AddTask> {
                 ),
                 // Framework dropdown
                 Container(
-                  color: Colors.white,
-                  width: double.infinity,
-                  //  MediaQuery.of(context).size.width * 0.5,
+                  color: Colors.grey.shade100,
+                  width: MediaQuery.of(context).size.width * 0.8,
                   child: DropdownMenu<String>(
-                    width: MediaQuery.of(context).size.width * 0.5,
+                    width: MediaQuery.of(context).size.width * 0.8,
                     initialSelection: framework.first,
                     onSelected: (String? value) {
                       setState(() {
@@ -267,10 +267,10 @@ class _AddTaskState extends State<AddTask> {
                 ),
                 // Difficulty dropdown
                 Container(
-                  color: Colors.white,
-                  width: MediaQuery.of(context).size.width * 0.5,
+                  color: Colors.grey.shade100,
+                  width: MediaQuery.of(context).size.width * 0.8,
                   child: DropdownMenu<String>(
-                    width: MediaQuery.of(context).size.width * 0.5,
+                    width: MediaQuery.of(context).size.width * 0.8,
                     initialSelection: Difficulty.first,
                     onSelected: (String? value) {
                       setState(() {
@@ -298,10 +298,10 @@ class _AddTaskState extends State<AddTask> {
                 ),
                 // belont to dropdown
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  color: Colors.white,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  color: Colors.grey.shade100,
                   child: DropdownMenu<String>(
-                    width: MediaQuery.of(context).size.width * 0.5,
+                    width: MediaQuery.of(context).size.width * 0.8,
                     initialSelection: projectName.first,
                     onSelected: (String? value) {
                       setState(() {
@@ -328,10 +328,10 @@ class _AddTaskState extends State<AddTask> {
                 ),
                 // Lead By dropdown
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  color: Colors.white,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  color: Colors.grey.shade100,
                   child: DropdownMenu<String>(
-                    width: MediaQuery.of(context).size.width * 0.5,
+                    width: MediaQuery.of(context).size.width * 0.8,
                     initialSelection: leadby.first["name"],
                     onSelected: (String? value) {
                       setState(() {
@@ -358,7 +358,7 @@ class _AddTaskState extends State<AddTask> {
                   onPressed: addTaskHandler,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xff349EFF),
-                    minimumSize: Size(MediaQuery.of(context).size.width * 0.95,
+                    minimumSize: Size(MediaQuery.of(context).size.width * 0.8,
                         MediaQuery.of(context).size.height * 0.07),
                   ),
                 ),
