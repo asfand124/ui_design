@@ -231,7 +231,9 @@ class _AddTaskState extends State<AddTask> {
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
-
+                SizedBox(
+                  height: 10,
+                ),
                 // Framework dropdown
                 Container(
                   color: Colors.white,
@@ -253,7 +255,7 @@ class _AddTaskState extends State<AddTask> {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 Text(
                   "Task Level",
@@ -322,7 +324,7 @@ class _AddTaskState extends State<AddTask> {
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 // Lead By dropdown
                 Container(
@@ -351,12 +353,13 @@ class _AddTaskState extends State<AddTask> {
                   child: Text(
                     'Submit',
                     style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   onPressed: addTaskHandler,
                   style: ElevatedButton.styleFrom(
-                    minimumSize:
-                        Size(200, 50), // Set the minimum size of the button
+                    backgroundColor: Color(0xff349EFF),
+                    minimumSize: Size(MediaQuery.of(context).size.width * 0.95,
+                        MediaQuery.of(context).size.height * 0.07),
                   ),
                 ),
               ],
