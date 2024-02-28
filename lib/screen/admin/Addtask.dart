@@ -94,7 +94,7 @@ class _AddTaskState extends State<AddTask> {
         "difficulty": DifficultyValue,
         "belongsTo": projectNameValue,
         "leaderID": leadbyValue,
-        "alottedTimeInHoure": nooftime,
+        "alottedTimeInHours": nooftime,
         "appliedForApproval": false,
         "defaulted": false,
         "paid": false,
@@ -113,159 +113,258 @@ class _AddTaskState extends State<AddTask> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: titleController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Task Title',
-                label: Text("Task Title"),
-              ),
-            ),
-            SizedBox(
-              height: 2,
-            ),
-            TextField(
-              controller: descrController,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Task Discription',
-                  label: Text("Task Discription")),
-            ),
-
-            SizedBox(
-              height: 10,
-            ),
-            Text("Time For Task"),
-            SizedBox(
-              height: 10,
-            ),
-
-            // timer for Hour set
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text("Add Task")),
+      ),
+      backgroundColor: Color(0xfffDDDFFF),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding:
+                const EdgeInsets.only(top: 20, right: 10, left: 10, bottom: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                IconButton(
-                  iconSize: 40,
-                  color: Colors.red,
-                  onPressed: () {
-                    setState(() {
-                      nooftime--;
-                    });
-                  },
-                  icon: Icon(Icons.exposure_minus_1),
+                Text(
+                  "Task Title:",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
                 ),
-                Container(
-                  decoration: BoxDecoration(),
-                  child: Text(
-                    "$nooftime'hr",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 25,
-                    ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: titleController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(borderSide: BorderSide.none),
+                    hintText: 'Task Title',
+                    label: Text("Task Title"),
+                    fillColor: Colors.grey.shade100,
+                    filled: true,
                   ),
                 ),
-                IconButton(
-                  iconSize: 40,
-                  color: Colors.green,
-                  onPressed: () {
-                    setState(() {
-                      nooftime++;
-                    });
-                  },
-                  icon: Icon(Icons.plus_one),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Task Description:",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: descrController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(borderSide: BorderSide.none),
+                    hintText: 'Task Discription',
+                    label: Text("Task Discription"),
+                    fillColor: Colors.grey.shade100,
+                    filled: true,
+                  ),
+                ),
+
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Time For Task",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+
+                // timer for Hour set
+                Container(
+                  width:
+                      //double.infinity,
+                      MediaQuery.of(context).size.width * 0.8,
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      border: Border.all(color: Colors.grey)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        iconSize: 40,
+                        color: Colors.red,
+                        onPressed: () {
+                          setState(() {
+                            nooftime--;
+                          });
+                        },
+                        icon: Icon(Icons.exposure_minus_1),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(),
+                        child: Text(
+                          "$nooftime'hr",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        iconSize: 40,
+                        color: Colors.green,
+                        onPressed: () {
+                          setState(() {
+                            nooftime++;
+                          });
+                        },
+                        icon: Icon(Icons.plus_one),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+
+                Text(
+                  "Which Platform",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                // Framework dropdown
+                Container(
+                  color: Colors.grey.shade100,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: DropdownMenu<String>(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    initialSelection: framework.first,
+                    onSelected: (String? value) {
+                      setState(() {
+                        frameworkValue = value!;
+                      });
+                    },
+                    dropdownMenuEntries: framework
+                        .map<DropdownMenuEntry<String>>((String value) {
+                      return DropdownMenuEntry<String>(
+                          value: value, label: value);
+                    }).toList(),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Task Level",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                // Difficulty dropdown
+                Container(
+                  color: Colors.grey.shade100,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: DropdownMenu<String>(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    initialSelection: Difficulty.first,
+                    onSelected: (String? value) {
+                      setState(() {
+                        DifficultyValue = value!;
+                      });
+                    },
+                    dropdownMenuEntries:
+                        Difficulty.map<DropdownMenuEntry<String>>(
+                            (String value) {
+                      return DropdownMenuEntry<String>(
+                          value: value, label: value);
+                    }).toList(),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Belong to",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                // belont to dropdown
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  color: Colors.grey.shade100,
+                  child: DropdownMenu<String>(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    initialSelection: projectName.first,
+                    onSelected: (String? value) {
+                      setState(() {
+                        projectNameValue = value!;
+                      });
+                    },
+                    dropdownMenuEntries: projectName
+                        .map<DropdownMenuEntry<String>>((String value) {
+                      return DropdownMenuEntry<String>(
+                          value: value, label: value);
+                    }).toList(),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Lead By",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                // Lead By dropdown
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  color: Colors.grey.shade100,
+                  child: DropdownMenu<String>(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    initialSelection: leadby.first["name"],
+                    onSelected: (String? value) {
+                      setState(() {
+                        leadbyValue = value!;
+                      });
+                    },
+                    dropdownMenuEntries:
+                        leadby.map<DropdownMenuEntry<String>>((employee) {
+                      return DropdownMenuEntry<String>(
+                          value: employee['id'], label: employee["name"]);
+                    }).toList(),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                // Submit button
+                ElevatedButton(
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: addTaskHandler,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xff349EFF),
+                    minimumSize: Size(MediaQuery.of(context).size.width * 0.8,
+                        MediaQuery.of(context).size.height * 0.07),
+                  ),
                 ),
               ],
             ),
-            Text("Which Platform"),
-
-            // Framework dropdown
-            DropdownMenu<String>(
-              initialSelection: framework.first,
-              onSelected: (String? value) {
-                setState(() {
-                  frameworkValue = value!;
-                });
-              },
-              dropdownMenuEntries:
-                  framework.map<DropdownMenuEntry<String>>((String value) {
-                return DropdownMenuEntry<String>(value: value, label: value);
-              }).toList(),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text("Difficulty"),
-            SizedBox(
-              height: 5,
-            ),
-            // Difficulty dropdown
-            DropdownMenu<String>(
-              initialSelection: Difficulty.first,
-              onSelected: (String? value) {
-                setState(() {
-                  DifficultyValue = value!;
-                });
-              },
-              dropdownMenuEntries:
-                  Difficulty.map<DropdownMenuEntry<String>>((String value) {
-                return DropdownMenuEntry<String>(value: value, label: value);
-              }).toList(),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text("belong to"),
-            SizedBox(
-              height: 5,
-            ),
-            // belont to dropdown
-            DropdownMenu<String>(
-              initialSelection: projectName.first,
-              onSelected: (String? value) {
-                setState(() {
-                  projectNameValue = value!;
-                });
-              },
-              dropdownMenuEntries:
-                  projectName.map<DropdownMenuEntry<String>>((String value) {
-                return DropdownMenuEntry<String>(value: value, label: value);
-              }).toList(),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text("Lead By"),
-            SizedBox(
-              height: 5,
-            ),
-            // Lead By dropdown
-            DropdownMenu<String>(
-              initialSelection: leadby.first["name"],
-              onSelected: (String? value) {
-                setState(() {
-                  leadbyValue = value!;
-                });
-              },
-              dropdownMenuEntries:
-                  leadby.map<DropdownMenuEntry<String>>((employee) {
-                return DropdownMenuEntry<String>(
-                    value: employee['id'], label: employee["name"]);
-              }).toList(),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            // Submit button
-            ElevatedButton(
-              child: const Text('Submit'),
-              onPressed: addTaskHandler,
-            ),
-          ],
+          ),
         ),
       ),
     );
