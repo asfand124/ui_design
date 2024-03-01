@@ -12,7 +12,6 @@ import 'package:ui_design/screen/user/Home.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
-
   @override
   State<Login> createState() => _LoginState();
 }
