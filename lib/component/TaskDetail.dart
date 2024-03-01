@@ -32,12 +32,10 @@ class _TaskDetailState extends State<TaskDetail> {
     }
   }
 
-  updateUserActiveTask() {
+  updateUserActiveTask(State) {
     try {
-      FirebaseFirestore.instance
-          .collection("Users")
-          .doc(getUserId())
-          .update({'activeTask': widget.taskDetails['id']}).then((value) {
+      FirebaseFirestore.instance.collection("Users").doc(getUserId()).update(
+          {'activeTask': State ? "" : widget.taskDetails['id']}).then((value) {
         Navigator.push(context,
             MaterialPageRoute(builder: ((context) => PageNavigation())));
       });
@@ -59,7 +57,7 @@ class _TaskDetailState extends State<TaskDetail> {
             "assignedAt": FieldValue.serverTimestamp(),
             "assignedTo": getUserId()
           }).then((value) {
-            updateUserActiveTask();
+            updateUserActiveTask(false);
           });
         } on FirebaseException catch (e) {
           print(e.code);
@@ -81,6 +79,9 @@ class _TaskDetailState extends State<TaskDetail> {
       "submittedForApproval": status,
       "panelty": status ? 0 : 100,
     }).then((value) {
+      setState(() {
+        updateUserActiveTask(status);
+      });
       Navigator.push(context,
           MaterialPageRoute(builder: ((context) => AdminPageNavigation())));
     });
@@ -509,7 +510,7 @@ class _TaskDetailState extends State<TaskDetail> {
                             primary: Colors.redAccent,
                           ),
                           onPressed: () {
-                            handleApproval(true);
+                            handleApproval(false);
                           },
                           child: Text(
                             "Reject",

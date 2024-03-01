@@ -145,7 +145,7 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 10,
               ),
-          
+
               isTaskActive
                   ? Task(
                       title: activeTask['Title'],
@@ -160,7 +160,7 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 10,
               ),
-          
+
               // Upcoming Tasks
               UpcomingTasks(dataStream: availableTasks)
             ],

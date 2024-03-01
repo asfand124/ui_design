@@ -53,115 +53,113 @@ class _ClientDataState extends State<Wallet> {
         .then((response) {
       setState(() {
         Credit = response.data()!['Credit'].toString();
-
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(
-        child: Column(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.07,
-              width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(
-                color: Colors.purple,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "SoftXion Bank",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white),
-                    ),
-                    Row(
-                      children: [
-                        const Icon(Icons.notifications, color: Colors.white),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.1,
-                        ),
-                        const Icon(Icons.logout, color: Colors.white)
-                      ],
-                    )
-                  ],
-                ),
-              ),
+    return SafeArea(
+      child: Column(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height * 0.07,
+            width: MediaQuery.of(context).size.width,
+            decoration: const BoxDecoration(
+              color: Colors.purple,
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.15,
-              width: MediaQuery.of(context).size.width * 0.7,
-              decoration: BoxDecoration(
-                  color: Colors.purple,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Column(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Name",
-                    style: txt20700(),
+                  const Text(
+                    "SoftXion Bank",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white),
                   ),
-                  Text("RS ${Credit}", style: txt20700()),
+                  Row(
+                    children: [
+                      const Icon(Icons.notifications, color: Colors.white),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.1,
+                      ),
+                      const Icon(Icons.logout, color: Colors.white)
+                    ],
+                  )
                 ],
               ),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.02,
-            ),
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.purple,
-              ),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  children: [
-                    Text(
-                      "Project Statements",
-                      style: txt20700(),
-                    ),
-                    // Divider(),
-                    // Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //   children: [
-                    //   colcon(Colors.white),
-                    //   Text("Widthdraw",style: txt15600()),
-                    //   colcon(Colors.green),
-                    //   Text("Avalible",style: txt15600()),
-                    //   colcon(Colors.red),
-                    //   Text("Rejected",style: txt15600()),
-                    // ],),
-                    // Divider(),
-
-                    Divider(),
-                    Column(
-                      children: TransactionDetail.map(
-                        (e) => Column(
-                          children: [
-                            containertransaction(
-                              "${e['type']}",
-                              "${e['TName']}",
-                              "${e['TAmount']}",
-                              e['date'] as Timestamp,
-                            ),
-                          ],
-                        ),
-                      ).toList(),
-                    ),
-                  ],
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.03,
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.15,
+            width: MediaQuery.of(context).size.width * 0.7,
+            decoration: BoxDecoration(
+                color: Colors.purple, borderRadius: BorderRadius.circular(10)),
+            child: Column(
+              children: [
+                Text(
+                  "Name",
+                  style: txt20700(),
                 ),
+                Text("RS ${Credit}", style: txt20700()),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.02,
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.purple,
+            ),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                children: [
+                  Text(
+                    "Project Statements",
+                    style: txt20700(),
+                  ),
+                  // Divider(),
+                  // Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   children: [
+                  //   colcon(Colors.white),
+                  //   Text("Widthdraw",style: txt15600()),
+                  //   colcon(Colors.green),
+                  //   Text("Avalible",style: txt15600()),
+                  //   colcon(Colors.red),
+                  //   Text("Rejected",style: txt15600()),
+                  // ],),
+                  // Divider(),
+
+                  Divider(),
+                  Column(
+                    children: TransactionDetail.map(
+                      (e) => Column(
+                        children: [
+                          containertransaction(
+                            "${e['type']}",
+                            "${e['TName']}",
+                            "${e['TAmount']}",
+                            e['date'] as Timestamp,
+                          ),
+                        ],
+                      ),
+                    ).toList(),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-    
+          ),
+        ],
+      ),
+
       /////////////////////////////////////////////////////////////
     );
   }
