@@ -31,7 +31,9 @@ class RecentTask extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          ontap();
+          if (type == "debit") {
+            ontap();
+          }
         },
         child: Column(
           children: [

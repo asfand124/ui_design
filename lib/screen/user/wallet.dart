@@ -83,7 +83,7 @@ class _WalletState extends State<Wallet> {
                   height: 15,
                 ),
                 Text(
-                  'PKR4 000.0',
+                  'PKR ${Credit}',
                   style: TextStyle(
                     color: const Color(0xff349EFF),
                     fontSize: 30,
