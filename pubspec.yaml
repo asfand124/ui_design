@@ -18,6 +18,8 @@ dependencies:
   timer_builder: ^2.0.0
   flutter_easyloading: ^3.0.5
   pie_chart: ^5.4.0
+  shared_preferences: ^2.2.2
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
