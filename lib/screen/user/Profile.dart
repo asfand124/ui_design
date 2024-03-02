@@ -1,239 +1,247 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_design/Authentication/Login.dart';
+import 'package:ui_design/logics/User.dart';
 import 'package:ui_design/screen/user/Home.dart';
 import 'package:ui_design/screen/user/wallet.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    Logouthandler() {
-      FirebaseAuth.instance.signOut().then((value) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Login()),
-        );
-        print("object");
-      });
-    }
+  State<Profile> createState() => _ProfileState();
+}
 
-    return  Container(
-      padding: EdgeInsets.only(left: 15,right: 15,top: 10,bottom: 10),
-      child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // User Img
-                CircleAvatar(
-                  radius: 60,
-                  backgroundImage: NetworkImage(
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-LpLfFkHIV6jkxMTs9vlK7gI8JbZM7cEmhmjCPXQfucl5BYYaYkFyPOONAVGJh03JBgQ&usqp=CAU "),
-                ),
-                SizedBox(height: 10,),
-                Container(
-                  height: MediaQuery.of(context).size.height*0.53,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
+class _ProfileState extends State<Profile> {
+  Map<String, dynamic> userDetails = {};
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUserData();
+  }
+
+  getUserData() {
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc(getUserId())
+        .get()
+        .then((res) {
+      setState(() {
+        userDetails = res.data()!;
+      });
+    });
+  }
+
+  Logouthandler() {
+    FirebaseAuth.instance.signOut().then((value) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Login()),
+      );
+      print("object");
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+        ),
+        Positioned(
+          top: 90,
+          left: 25,
+          right: 25,
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.60,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 80),
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 14),
+                    child: Center(
+                      child: Text(
+                        "${userDetails["Name"]}",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 22),
+                      ),
+                    ),
                   ),
-                  child: Padding(
-                       padding: EdgeInsets.only(left: 15,right: 15,bottom: 20,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 50),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text('Asfandyar khan'),
                         SizedBox(
-                          height: 10,
+                          height: 40,
                         ),
                         Row(
                           children: [
-                            Icon(Icons.person_2_rounded,
-                            size: 28,
+                            Icon(
+                              Icons.person_2_rounded,
+                              size: 20,
                             ),
                             SizedBox(
                               width: 15,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-
                               children: [
-                                Text('Father name'),
+                                Text(
+                                  'Father name',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
                                 Text('Shaber Ahmed'),
-
                               ],
                             ),
                           ],
-                                
                         ),
-                         SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 30,
                         ),
                         Row(
                           children: [
-                            Icon(Icons.join_inner,
-                            size: 28,
+                            Icon(
+                              Icons.join_inner,
+                              size: 20,
                             ),
-
-                             SizedBox(
+                            SizedBox(
                               width: 15,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-
                               children: [
-                                Text('Joining Date'),
+                                Text('Joining Date',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    )),
                                 Text('12-2-2024'),
-                                
                               ],
                             ),
                           ],
-                                
                         ),
-                         SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 30,
                         ),
                         Row(
                           children: [
-                            Icon(Icons.person_4_outlined,
-                            size: 28,
+                            Icon(
+                              Icons.person_4_outlined,
+                              size: 20,
                             ),
-                             SizedBox(
+                            SizedBox(
                               width: 15,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-
                               children: [
-                                Text('Age'),
+                                Text('Age',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    )),
                                 Text('22'),
-                                
                               ],
                             ),
                           ],
-                                
                         ),
-                         SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 30,
                         ),
                         Row(
                           children: [
-                            Icon(Icons.lightbulb_circle,
-                            size: 28,
+                            Icon(
+                              Icons.lightbulb_circle,
+                              size: 20,
                             ),
-                             SizedBox(
+                            SizedBox(
                               width: 15,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-
                               children: [
-                                Text('skills'),
+                                Text('skills',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    )),
                                 Text('flutter'),
-                                
                               ],
                             ),
                           ],
-                                
                         ),
-                         SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 30,
                         ),
                         Row(
                           children: [
-                            Icon(Icons.mail_outline,
-                            size: 28,
+                            Icon(
+                              Icons.mail_outline,
+                              size: 20,
                             ),
-                             SizedBox(
+                            SizedBox(
                               width: 15,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('E-Mail'),
+                                Text('Email',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    )),
                                 Text('xyz@gmail.com'),
-                                
                               ],
                             ),
                           ],
-                                
                         ),
                       ],
                     ),
                   ),
-                ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     Text(
-                //       "Name",
-                //       style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-                //     ),
-                //     Text("Name")
-                //   ],
-                // ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     Text(
-                //       "Father Name",
-                //       style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-                //     ),
-                //     Text("Father Name")
-                //   ],
-                // ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     Text(
-                //       "Joining Date",
-                //       style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-                //     ),
-                //     Text("Joining Date")
-                //   ],
-                // ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     Text(
-                //       "Age",
-                //       style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-                //     ),
-                //     Text("Age")
-                //   ],
-                // ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     Text(
-                //       "Date Of Birth",
-                //       style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-                //     ),
-                //     Text("Date Of Birth"),
-                //   ],
-                // ),
-                SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                        onPressed: (){},
-                        style: ElevatedButton.styleFrom(
-                        backgroundColor:Color(0xff821DFB),
-                        minimumSize: Size(220, 50),
-                        
-                        textStyle: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-                        child: Text("Logout",style: TextStyle(color: Colors.white),),
-                      ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
+        Positioned(
+            top: 30,
+            right: 0,
+            left: 25,
+            child: Container(
+              child: CircleAvatar(
+                radius: 60,
+                backgroundColor: Colors.blue,
+              ),
+            )),
+        Positioned(
+          bottom: 90,
+          left: 80,
+          child: Container(
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xff821DFB),
+                  minimumSize: Size(220, 50),
+                  textStyle:
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              child: Text(
+                "Logout",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

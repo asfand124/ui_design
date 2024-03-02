@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ui_design/screen/user/Contact.dart';
+
 import 'package:ui_design/screen/user/Home.dart';
 import 'package:ui_design/screen/user/Profile.dart';
 import 'package:ui_design/screen/user/UserSetting.dart';
+import 'package:ui_design/screen/user/UserTasks.dart';
 import 'package:ui_design/screen/user/wallet.dart';
 
 class PageNavigation extends StatefulWidget {
@@ -17,10 +18,10 @@ class _PageNavigationState extends State {
 
   List _pages = [
     Home(),
+    userTasks(),
     Wallet(),
-    Profile(),
-  Contact(),
     UserSetting(),
+    Profile(),
   ];
 
   _changeTab(int index) {

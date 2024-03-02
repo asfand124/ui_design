@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ui_design/Shimmers/HomeShimmer.dart';
 import 'package:ui_design/component/Task.dart';
 
 import 'package:ui_design/component/UpComingTasks.dart';
@@ -22,7 +23,7 @@ class _HomeState extends State<Home> {
   Map<String, dynamic> userDetails = {};
   Map<String, dynamic> activeTask = {};
   List<Map<String, dynamic>> availableTasks = [];
-
+  bool isPageLoading = true;
   bool isTaskActive = false;
 
   @override
@@ -30,11 +31,9 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     getUserDetail();
-    getAllUpcomingTasks();
   }
 
   getUserDetail() async {
-    print("object");
     String userId = FirebaseAuth.instance.currentUser!.uid;
 
     await FirebaseFirestore.instance
@@ -53,6 +52,7 @@ class _HomeState extends State<Home> {
         getAtiveTask(response.data()!['activeTask']);
       }
     });
+    getAllUpcomingTasks();
   }
 
   getAtiveTask(id) async {
@@ -83,90 +83,95 @@ class _HomeState extends State<Home> {
 
       setState(() {
         availableTasks = tempRecords;
+        isPageLoading = false;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: 70,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Hi, ${userDetails['Name']}',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: GoogleFonts.inter().fontFamily,
-                            ),
-                          ),
-                          Text(
-                            'Are you ready to get back to work?',
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: GoogleFonts.inter().fontFamily,
-                            ),
-                          ),
-                        ],
+    return isPageLoading
+        ? HomeShimmer()
+        : Container(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 70,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          color: Color(0xffFB6565),
-                          borderRadius: BorderRadius.circular(100),
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Hi, ${userDetails['Name']}',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: GoogleFonts.inter().fontFamily,
+                                  ),
+                                ),
+                                Text(
+                                  'Are you ready to get back to work?',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: GoogleFonts.inter().fontFamily,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                color: Color(0xffFB6565),
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    //-------------------component----------------------------
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    isTaskActive
+                        ? Task(
+                            title: activeTask['Title'],
+                            time: activeTask['assignedAt'].toDate(),
+                            taskID: activeTask['id'],
+                            submitForApproval:
+                                activeTask['submittedForApproval'],
+                            allotedTime: activeTask['alottedTimeInHours'],
+                          )
+                        : Center(
+                            child: Text("No Active task"),
+                          ),
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    // Upcoming Tasks
+                    UpcomingTasks(dataStream: availableTasks)
+                  ],
                 ),
               ),
-              //-------------------component----------------------------
-              SizedBox(
-                height: 10,
-              ),
-          
-              isTaskActive
-                  ? Task(
-                      title: activeTask['Title'],
-                      time: activeTask['assignedAt'].toDate(),
-                      taskID: activeTask['id'],
-                      submitForApproval: activeTask['submittedForApproval'],
-                      allotedTime: activeTask['alottedTimeInHours'],
-                    )
-                  : Center(
-                      child: Text("No Active task"),
-                    ),
-              SizedBox(
-                height: 10,
-              ),
-          
-              // Upcoming Tasks
-              UpcomingTasks(dataStream: availableTasks)
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
 }
