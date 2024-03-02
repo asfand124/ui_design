@@ -58,157 +58,159 @@ class _ProfileState extends State<Profile> {
           top: 90,
           left: 25,
           right: 25,
-          child: Container(
-            height: MediaQuery.of(context).size.height * 0.60,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 80),
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 14),
-                    child: Center(
-                      child: Text(
-                        "${userDetails["Name"]}",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 22),
+          child: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.80,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 80),
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 14),
+                      child: Center(
+                        child: Text(
+                          "${userDetails["Name"]}",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 22),
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50),
-                    child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      // crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.person_2_rounded,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Father name',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                Text('Shaber Ahmed'),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.join_inner,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Joining Date',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                                Text('12-2-2024'),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.person_4_outlined,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Age',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                                Text('22'),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.lightbulb_circle,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('skills',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                                Text('flutter'),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.mail_outline,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Email',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                                Text('xyz@gmail.com'),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50),
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.person_2_rounded,
+                                size: 20,
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Father name',
+                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text('Shaber Ahmed'),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.join_inner,
+                                size: 20,
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Joining Date',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  Text('12-2-2024'),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.person_4_outlined,
+                                size: 20,
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Age',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  Text('22'),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.lightbulb_circle,
+                                size: 20,
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('skills',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  Text('flutter'),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.mail_outline,
+                                size: 20,
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Email',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  Text('xyz@gmail.com'),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -223,6 +225,7 @@ class _ProfileState extends State<Profile> {
                 backgroundColor: Colors.blue,
               ),
             )),
+            
         Positioned(
           bottom: 90,
           left: 80,

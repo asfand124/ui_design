@@ -80,10 +80,10 @@ class UserSetting extends StatelessWidget {
                     child: Row(
                      
                       children: [
-                        Icon(Icons.person_2_outlined,size: 10,),
-                        SizedBox(width: 30,),
+                        Icon(Icons.person_2_outlined,size: 18,),
+                        SizedBox(width: MediaQuery.of(context).size.width*0.03,),
                         Text('Profile'),
-                        SizedBox(width: 180,),
+                        SizedBox(width: MediaQuery.of(context).size.width*0.57,),
                         Icon(Icons.arrow_forward_ios_outlined,size: 10,),
                     
                       ],
@@ -105,10 +105,10 @@ class UserSetting extends StatelessWidget {
                     child: Row(
                      
                       children: [
-                        Icon(Icons.perm_device_information_outlined,size: 10,),
-                        SizedBox(width: 30,),
+                        Icon(Icons.perm_device_information_outlined,size: 18,),
+                        SizedBox(width:  MediaQuery.of(context).size.width*0.03,),
                         Text('Information'),
-                        SizedBox(width: 150,),
+                        SizedBox(width:  MediaQuery.of(context).size.width*0.48,),
                         Icon(Icons.arrow_forward_ios_outlined,size: 10,),
                     
                       ],
@@ -130,10 +130,10 @@ class UserSetting extends StatelessWidget {
                     child: Row(
                      
                       children: [
-                        Icon(Icons.person_4_outlined,size: 10,),
-                        SizedBox(width: 30,),
+                        Icon(Icons.person_4_outlined,size: 18,),
+                        SizedBox(width:  MediaQuery.of(context).size.width*0.03,),
                         Text('About'),
-                        SizedBox(width: 190,),
+                        SizedBox(width:  MediaQuery.of(context).size.width*0.58,),
                         Icon(Icons.arrow_forward_ios_outlined,size: 10,),
                     
                       ],
@@ -153,6 +153,7 @@ class UserSetting extends StatelessWidget {
                     height: 10,
                   ),
                   Card(
+                    elevation: 10,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -177,10 +178,10 @@ class UserSetting extends StatelessWidget {
                     child: Row(
                      
                       children: [
-                        Icon(Icons.question_mark_rounded,size: 10,),
-                        SizedBox(width: 30,),
+                        Icon(Icons.question_mark_rounded,size: 18,),
+                        SizedBox(width:  MediaQuery.of(context).size.width*0.03,),
                         Text('leagel'),
-                        SizedBox(width: 190,),
+                        SizedBox(width:  MediaQuery.of(context).size.width*0.59,),
                         Icon(Icons.arrow_forward_ios_outlined,size: 10,),
                     
                       ],
@@ -201,10 +202,10 @@ class UserSetting extends StatelessWidget {
                     child: Row(
                      
                       children: [
-                        Icon(Icons.lock_open_rounded,size: 10,),
-                        SizedBox(width: 30,),
+                        Icon(Icons.lock_open_rounded,size: 18,),
+                        SizedBox(width:  MediaQuery.of(context).size.width*0.03,),
                         Text('Terms and condition'),
-                        SizedBox(width: 100,),
+                        SizedBox(width:  MediaQuery.of(context).size.width*0.33,),
                         Icon(Icons.arrow_forward_ios_outlined,size: 10,),
                     
                       ],
@@ -225,10 +226,10 @@ class UserSetting extends StatelessWidget {
                     child: Row(
                      
                       children: [
-                        Icon(Icons.info,size: 10,),
-                        SizedBox(width: 30,),
+                        Icon(Icons.info,size: 18,),
+                        SizedBox(width:  MediaQuery.of(context).size.width*0.03,),
                         Text('support'),
-                        SizedBox(width: 185,),
+                        SizedBox(width:  MediaQuery.of(context).size.width*0.56,),
                         Icon(Icons.arrow_forward_ios_outlined,size: 10,),
                     
                       ],
