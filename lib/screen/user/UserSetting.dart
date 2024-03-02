@@ -54,6 +54,8 @@ class UserSetting extends StatelessWidget {
                     height: 15,
                   ),
                   Card(
+                    elevation: 10,
+
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -78,11 +80,11 @@ class UserSetting extends StatelessWidget {
                     child: Row(
                      
                       children: [
-                        Icon(Icons.person_2_outlined),
+                        Icon(Icons.person_2_outlined,size: 10,),
                         SizedBox(width: 30,),
                         Text('Profile'),
                         SizedBox(width: 180,),
-                        Icon(Icons.arrow_forward_ios_outlined),
+                        Icon(Icons.arrow_forward_ios_outlined,size: 10,),
                     
                       ],
                     ),
@@ -103,11 +105,11 @@ class UserSetting extends StatelessWidget {
                     child: Row(
                      
                       children: [
-                        Icon(Icons.perm_device_information_outlined),
+                        Icon(Icons.perm_device_information_outlined,size: 10,),
                         SizedBox(width: 30,),
                         Text('Information'),
                         SizedBox(width: 150,),
-                        Icon(Icons.arrow_forward_ios_outlined),
+                        Icon(Icons.arrow_forward_ios_outlined,size: 10,),
                     
                       ],
                     ),
@@ -128,15 +130,20 @@ class UserSetting extends StatelessWidget {
                     child: Row(
                      
                       children: [
-                        Icon(Icons.person_4_outlined),
+                        Icon(Icons.person_4_outlined,size: 10,),
                         SizedBox(width: 30,),
                         Text('About'),
                         SizedBox(width: 190,),
-                        Icon(Icons.arrow_forward_ios_outlined),
+                        Icon(Icons.arrow_forward_ios_outlined,size: 10,),
                     
                       ],
                     ),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  
+
                       ],
                     ),
                     
@@ -170,11 +177,11 @@ class UserSetting extends StatelessWidget {
                     child: Row(
                      
                       children: [
-                        Icon(Icons.question_mark_rounded),
+                        Icon(Icons.question_mark_rounded,size: 10,),
                         SizedBox(width: 30,),
                         Text('leagel'),
                         SizedBox(width: 190,),
-                        Icon(Icons.arrow_forward_ios_outlined),
+                        Icon(Icons.arrow_forward_ios_outlined,size: 10,),
                     
                       ],
                     ),
@@ -194,11 +201,11 @@ class UserSetting extends StatelessWidget {
                     child: Row(
                      
                       children: [
-                        Icon(Icons.lock_open_rounded),
+                        Icon(Icons.lock_open_rounded,size: 10,),
                         SizedBox(width: 30,),
                         Text('Terms and condition'),
                         SizedBox(width: 100,),
-                        Icon(Icons.arrow_forward_ios_outlined),
+                        Icon(Icons.arrow_forward_ios_outlined,size: 10,),
                     
                       ],
                     ),
@@ -218,11 +225,11 @@ class UserSetting extends StatelessWidget {
                     child: Row(
                      
                       children: [
-                        Icon(Icons.info),
+                        Icon(Icons.info,size: 10,),
                         SizedBox(width: 30,),
                         Text('support'),
                         SizedBox(width: 185,),
-                        Icon(Icons.arrow_forward_ios_outlined),
+                        Icon(Icons.arrow_forward_ios_outlined,size: 10,),
                     
                       ],
                     ),
