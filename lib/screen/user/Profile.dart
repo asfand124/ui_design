@@ -104,7 +104,9 @@ class _ProfileState extends State<Profile> {
                                   'Father name',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                Text('Shaber Ahmed'),
+                                Text(
+                                  "${userDetails["fatherName"]}",
+                                ),
                               ],
                             ),
                           ],
@@ -128,7 +130,9 @@ class _ProfileState extends State<Profile> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     )),
-                                Text('12-2-2024'),
+                                Text(
+                                  "${userDetails["joiningDate"]}",
+                                ),
                               ],
                             ),
                           ],
@@ -152,7 +156,9 @@ class _ProfileState extends State<Profile> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     )),
-                                Text('22'),
+                                Text(
+                                  "${userDetails["Age"]}",
+                                ),
                               ],
                             ),
                           ],
@@ -176,7 +182,9 @@ class _ProfileState extends State<Profile> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     )),
-                                Text('flutter'),
+                                Text(
+                                  "${userDetails["skills"]}",
+                                ),
                               ],
                             ),
                           ],
@@ -200,7 +208,9 @@ class _ProfileState extends State<Profile> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     )),
-                                Text('xyz@gmail.com'),
+                                Text(
+                                  "${userDetails["email"]}",
+                                ),
                               ],
                             ),
                           ],
@@ -220,7 +230,9 @@ class _ProfileState extends State<Profile> {
             child: Container(
               child: CircleAvatar(
                 radius: 60,
-                backgroundColor: Colors.blue,
+                backgroundImage: NetworkImage(
+                  "${userDetails["imgUrl"]}",
+                ),
               ),
             )),
         Positioned(
