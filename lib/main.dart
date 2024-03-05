@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:ui_design/devMode.dart';
 import 'package:ui_design/firebase_options.dart';
 import 'package:ui_design/screen/user/Home.dart';
 import 'package:ui_design/Authentication/Login.dart';
@@ -21,7 +22,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       builder: EasyLoading.init(),
-      home: Login(),
+      home: devMode(),
+      // home: Login(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -7,6 +7,7 @@ import 'package:ui_design/Authentication/Signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ui_design/PageNavigation.dart';
 import 'package:ui_design/adminnavigationpage.dart';
+import 'package:ui_design/logics/SharedPreff.dart';
 import 'package:ui_design/screen/admin/AdminHome.dart';
 import 'package:ui_design/screen/user/Home.dart';
 
@@ -22,10 +23,22 @@ TextEditingController _pass = TextEditingController();
 class _LoginState extends State<Login> {
   @override
   void initState() {
-    // checkuser();
+    checkUser();
+  }
+
+  checkUser() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      String? _userType = await getString("userType");
+      print(_userType);
+      if (_userType != null) {
+        NavigateUser(_userType);
+      }
+    }
   }
 
   NavigateUser(String title) {
+    putString("userType", title);
     switch (title) {
       case "user":
         {
