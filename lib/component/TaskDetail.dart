@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -179,136 +181,143 @@ class _TaskDetailState extends State<TaskDetail> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20,bottom: 10),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: EdgeInsets.only(left: 15),
-                height: MediaQuery.of(context).size.height * 0.40,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Discription',
-                      style: TextStyle(
-                          fontSize: 23,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: GoogleFonts.karma().fontFamily),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text('${widget.taskDetails['Desc']}'),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Detail Discription',
-                      style: TextStyle(
-                          fontSize: 23,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: GoogleFonts.karma().fontFamily),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'He said this while launching the Final Year Design Project Financing held at University of Agriculture, Faisalabad. Pakistan Engineering Council has funded 593 projects for 2023-24 among students of more than 100 universities across the country.',
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 15),
-                height: MediaQuery.of(context).size.height * 0.35,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Center(
-                      child: Text(
-                        'Frame work',
+              Card(
+                color: Colors.white,
+                elevation: 0,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15,right: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Discription',
                         style: TextStyle(
                             fontSize: 23,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w700,
                             fontFamily: GoogleFonts.karma().fontFamily),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Time for task',
-                      style:
-                          TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      '${widget.taskDetails['alottedTimeInHours']} Hr',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: GoogleFonts.inter().fontFamily,
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'State',
-                      style:
-                          TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      '${widget.taskDetails['difficulty']}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontFamily: GoogleFonts.inter().fontFamily,
+                      Text('${widget.taskDetails['Desc']}'),
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Frame Work',
-                      style:
-                          TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
-                    ),
-                    Text('${widget.taskDetails['frameWork']}'),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
+                      Text(
+                        'Detail Discription',
+                        style: TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: GoogleFonts.karma().fontFamily),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'He said this while launching the Final Year Design Project Financing held at University of Agriculture, Faisalabad. Pakistan Engineering Council has funded 593 projects for 2023-24 among students of more than 100 universities across the country.',
+                       textAlign:TextAlign.justify
+                     ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
                 height: 30,
               ),
+             
+                // padding: EdgeInsets.only(left: 15),
+                // height: MediaQuery.of(context).size.height * 0.39,
+                // width: MediaQuery.of(context).size.width,
+                // decoration: BoxDecoration(
+                //   borderRadius: BorderRadius.circular(10),
+                //   color: Colors.white,
+                // ),
+                Card(
+                  color: Colors.white,
+                  elevation: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child: Text(
+                            'Frame work',
+                            style: TextStyle(
+                                fontSize: 23,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: GoogleFonts.karma().fontFamily),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Time for task',
+                          style:
+                              TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          '${widget.taskDetails['alottedTimeInHours']} Hr',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: GoogleFonts.inter().fontFamily,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'State',
+                          style:
+                              TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          '${widget.taskDetails['difficulty']}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontFamily: GoogleFonts.inter().fontFamily,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Frame Work',
+                          style:
+                              TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                        ),
+                        Text('${widget.taskDetails['frameWork']}'),
+                       
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              
+              SizedBox(
+                height: 30,
+              ),
               Container(
                 padding: EdgeInsets.only(left: 15),
-                height: MediaQuery.of(context).size.height * 0.35,
+                height: MediaQuery.of(context).size.height * 0.4,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
