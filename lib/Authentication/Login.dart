@@ -6,9 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_design/Authentication/Signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ui_design/PageNavigation.dart';
-import 'package:ui_design/adminnavigationpage.dart';
+
 import 'package:ui_design/logics/SharedPreff.dart';
 import 'package:ui_design/screen/admin/AdminHome.dart';
+import 'package:ui_design/screen/admin/Adminnavigationpage.dart';
 import 'package:ui_design/screen/user/Home.dart';
 
 class Login extends StatefulWidget {
@@ -50,7 +51,8 @@ class _LoginState extends State<Login> {
       case "admin":
         {
           Navigator.of(context).push(
-              MaterialPageRoute(builder: ((context) => AdminPageNavigation())));
+              MaterialPageRoute(builder: ((context) => 
+              AdminPageNavigation())));
           break;
         }
     }

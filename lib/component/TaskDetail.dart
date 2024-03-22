@@ -1,11 +1,10 @@
-import 'dart:js_interop';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_design/PageNavigation.dart';
-import 'package:ui_design/adminnavigationpage.dart';
 import 'package:ui_design/logics/User.dart';
+import 'package:ui_design/screen/admin/Adminnavigationpage.dart';
 
 class TaskDetail extends StatefulWidget {
   final Map<String, dynamic> taskDetails;
@@ -78,14 +77,19 @@ class _TaskDetailState extends State<TaskDetail> {
         .doc(widget.taskDetails['id'])
         .update({
       "Completed": status,
-      "submittedForApproval": status,
+      "submittedForApproval": false,
       "panelty": status ? 0 : 100,
     }).then((value) {
       setState(() {
         updateUserActiveTask(status);
       });
       Navigator.push(context,
-          MaterialPageRoute(builder: ((context) => AdminPageNavigation())));
+          MaterialPageRoute(builder: ((context) => 
+          const AdminPageNavigation())));
+    // if (context.mounted) {
+      // Navigator.pop(context);
+// Navigator.of(context, rootNavigator: true).pop();      
+    // }
     });
   }
 

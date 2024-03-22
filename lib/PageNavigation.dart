@@ -20,9 +20,8 @@ class _PageNavigationState extends State {
     Home(),
     userTasks(),
     Wallet(),
-    
     Profile(),
-    UserSetting(),
+   UserSetting(),
   ];
 
   _changeTab(int index) {

@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ui_design/devMode.dart';
 import 'package:ui_design/firebase_options.dart';
-import 'package:ui_design/screen/user/Home.dart';
-import 'package:ui_design/Authentication/Login.dart';
-import 'package:ui_design/Authentication/Signup.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
