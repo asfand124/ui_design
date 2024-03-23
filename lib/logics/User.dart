@@ -54,3 +54,23 @@ Future<String> getUserCurrentTaskId() async {
 
   return taskId;
 }
+getUserNameById(String id) async {
+
+  String name = "";
+
+    final docRef = FirebaseFirestore.instance.collection("Users").doc(id);
+    try {
+      var doc = await docRef.get();
+      if (doc.exists) {
+      
+          name ="${ doc.data()!["Name"]} ${doc.data()!["FatherName"]}";
+        } 
+      }
+     catch (e) {
+      print(e);
+    }
+  
+ 
+
+  return name;
+}

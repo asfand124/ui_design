@@ -1,6 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:ui_design/PageNavigation.dart';
 import 'package:ui_design/component/employeetask.dart';
 
 class AdminHome extends StatefulWidget {
@@ -54,6 +56,7 @@ class _AdminHomeState extends State<AdminHome> {
       };
     });
   }
+
 
   @override
   Widget build(BuildContext context) {

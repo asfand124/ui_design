@@ -86,7 +86,7 @@ class _TaskDetailState extends State<TaskDetail> {
       });
       Navigator.push(context,
           MaterialPageRoute(builder: ((context) => 
-          const AdminPageNavigation())));
+            AdminPageNavigation(tabNo: 2))));
     if (status) {
        FirebaseFirestore.instance
         .collection("Users")
