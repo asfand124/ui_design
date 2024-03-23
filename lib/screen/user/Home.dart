@@ -157,12 +157,12 @@ class _HomeState extends State<Home> {
                             taskID: activeTask['id'],
                             submitForApproval:
                                 activeTask['submittedForApproval'],
-                            allotedTime: activeTask['alottedTimeInHours'],
+                            allotedTime: int.parse(activeTask['alottedTimeInHours']),
                           )
                         : Center(
                             child: Text("No Active task"),
                           ),
-                    SizedBox(
+                    SizedBox( 
                       height: 10,
                     ),
 

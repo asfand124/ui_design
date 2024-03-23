@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ui_design/screen/admin/Addtask.dart';
 import 'package:ui_design/screen/admin/AdminHome.dart';
 import 'package:ui_design/screen/admin/AproveTasks.dart';
+import 'package:ui_design/screen/admin/userTaskPayment.dart';
 import 'package:ui_design/screen/user/Home.dart';
 import 'package:ui_design/screen/user/Profile.dart';
 import 'package:ui_design/screen/user/wallet.dart';
@@ -20,6 +21,7 @@ class _AdminPageNavigationState extends State {
     AdminHome(),
     AddTask(),
     AproveTaks(),
+    UserTaskPayment()
   ];
 
   _changeTab(int index) {
@@ -46,7 +48,7 @@ class _AdminPageNavigationState extends State {
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.home,
+                  Icons.add,
                   color: Colors.white,
                 ),
                 label: "Home"),
@@ -62,6 +64,12 @@ class _AdminPageNavigationState extends State {
                   color: Colors.white,
                 ),
                 label: "Grade"),
+                  BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.wallet,
+                  color: Colors.white,
+                ),
+                label: "wallet"),
           ],
         ),
       ),

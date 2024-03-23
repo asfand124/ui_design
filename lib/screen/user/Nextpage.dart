@@ -16,7 +16,8 @@ class Dis extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => TaskDetail(taskDetails: {}),
+                          builder: (context) => 
+                          TaskDetail(taskDetails: {}),
                         ),
                       );
                     },

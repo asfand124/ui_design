@@ -38,7 +38,8 @@ class _TaskDetailState extends State<TaskDetail> {
       FirebaseFirestore.instance.collection("Users").doc(getUserId()).update(
           {'activeTask': State ? "" : widget.taskDetails['id']}).then((value) {
         Navigator.push(context,
-            MaterialPageRoute(builder: ((context) => PageNavigation())));
+            MaterialPageRoute(builder: ((context) =>
+             AdminPageNavigation())));
       });
     } on FirebaseException catch (e) {
       print(e.code);
@@ -86,10 +87,14 @@ class _TaskDetailState extends State<TaskDetail> {
       Navigator.push(context,
           MaterialPageRoute(builder: ((context) => 
           const AdminPageNavigation())));
-    // if (context.mounted) {
-      // Navigator.pop(context);
-// Navigator.of(context, rootNavigator: true).pop();      
-    // }
+    if (status) {
+       FirebaseFirestore.instance
+        .collection("Users")
+        .doc(widget.taskDetails['assignedTo'])
+        .update({
+      "activeTask":""
+        });
+    }
     });
   }
 
@@ -535,7 +540,8 @@ class _TaskDetailState extends State<TaskDetail> {
                   : getUserType() == "admin"
                       ? SizedBox()
                       : Center(
-                          child: ElevatedButton(
+                          child: 
+                          ElevatedButton(
                               onPressed: startTask,
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Color(0xff349EFF),

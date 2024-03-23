@@ -54,45 +54,13 @@ class _userTasksState extends State<userTasks> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Scaffold(
+      appBar: AppBar(title: Text("Previous Tasks"),),
+      body:  Padding(
       padding: const EdgeInsets.only(left: 15, right: 20, top: 20),
       child: Column(
         children: [
-          Container(
-            padding: const EdgeInsets.only(left: 15, top: 15),
-            height: MediaQuery.of(context).size.height * 0.26,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Payment Pending tasks',
-                  style: TextStyle(
-                      color: Color(0xff979797), fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  '10',
-                  style: TextStyle(
-                    color: const Color(0xff349EFF),
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: GoogleFonts.poppins().fontFamily,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Row(
+           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ElevatedButton(
                   onPressed: () {
@@ -110,11 +78,39 @@ class _userTasksState extends State<userTasks> {
                   child: Text("Defaulted"))
             ],
           ),
+         SizedBox(height: 30,),
+          Container(
+            padding: const EdgeInsets.only(left: 15, top: 15),
+            height: MediaQuery.of(context).size.height * 0.06,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Previous Tasks(0)',
+                  style: TextStyle(
+                      color: Color(0xff979797), fontWeight: FontWeight.w600),
+                ),
+
+               Icon(Icons.refresh)
+               
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+         
           const SizedBox(
             height: 10,
           ),
           Container(
-            height: MediaQuery.of(context).size.height - 376,
+            height: MediaQuery.of(context).size.height * 0.07,
             child: SingleChildScrollView(
               child: Column(children: [
                 Visibility(
@@ -138,16 +134,20 @@ class _userTasksState extends State<userTasks> {
           ),
         ],
       ),
-    );
+    )
+ ,);
+   
   }
 }
 
 Widget taskCard(context, String title) {
   return Container(
+    decoration: BoxDecoration(    color: Colors.deepPurpleAccent,
+      borderRadius: BorderRadius.circular(10)),
     width: MediaQuery.of(context).size.width,
-    height: 100,
+    height: 50,
     margin: EdgeInsets.only(bottom: 10),
-    color: Colors.deepPurpleAccent,
-    child: Text(title),
+
+    child: Center(child: Text(title,style: TextStyle(color: Colors.white),)),
   );
 }
