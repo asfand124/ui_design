@@ -77,6 +77,7 @@ class _TaskDetailState extends State<TaskDetail> {
         .collection("Tasks")
         .doc(widget.taskDetails['id'])
         .update({
+         "amountToBePaid": TotalPayable,
       "Completed": status,
       "submittedForApproval": false,
       "panelty": status ? 0 : 100,
@@ -383,38 +384,6 @@ class _TaskDetailState extends State<TaskDetail> {
               SizedBox(
                 height: 10,
               ),
-//               Container(
-//                  padding: EdgeInsets.only(left: 15),
-//               height:MediaQuery.of(context).size.height*0.33,
-//               width: MediaQuery.of(context).size.width,
-//               decoration: BoxDecoration(
-//                 borderRadius: BorderRadius.circular(10),
-//                           color: Colors.white,
-
-//               ),
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                       SizedBox(
-//                       height: 10,
-//                     ),
-//                      Text(
-//                 'Detail Discription',
-//                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w700,
-//                 fontFamily: GoogleFonts.karma().fontFamily
-// ),
-//               ),
-//                     SizedBox(
-//                       height: 20,
-//                     ),
-//                     Text('He said this while launching the Final Year Design Project Financing held at University of Agriculture, Faisalabad. Pakistan Engineering Council has funded 593 projects for 2023-24 among students of more than 100 universities across the country.',
-//                 style: TextStyle( fontWeight: FontWeight.w700,
-//                 fontFamily: GoogleFonts.karma().fontFamily
-// ),),
-
-//                   ],
-//                 ),
-//               ),
               SizedBox(
                 height: 20,
               ),
@@ -493,7 +462,7 @@ class _TaskDetailState extends State<TaskDetail> {
                                 Text("In Project: " + "${e['calls']}"),
                                 Text("Price Per: " + "${e['price']}"),
                                 Align(
-                                    alignment: Alignment.centerRight,
+                                    alignment: Alignment.centerRight,  
                                     child: Text(
                                       "Total: " + "${e['total']}",
                                       style: TextStyle(

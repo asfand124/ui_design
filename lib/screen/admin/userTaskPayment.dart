@@ -35,6 +35,8 @@ class _userTasksState extends State<UserTaskPayment> {
         .where("Completed", isEqualTo: true)
         .where("paid", isEqualTo: false)
         .where("defaulted", isEqualTo: false)
+      
+
         .get()
         .then((res) {
       List tempData = [];
@@ -50,9 +52,13 @@ class _userTasksState extends State<UserTaskPayment> {
             var doc = await docRef.get();
             if (doc.exists) {
               name = "${doc.data()!["Name"]} ${doc.data()!["FatherName"]}";
+           int   credit= int.parse("${doc.data()!["credit"]} ");
+           print(credit);
+           
+        
               print(name);
               tempData
-                  .add({...element.data(), "id": element.id, "userName": name});
+                  .add({...element.data(), "id": element.id, "userName": name, "credit":credit});
             } 
           } catch (e) {
             print(e);
@@ -64,23 +70,32 @@ class _userTasksState extends State<UserTaskPayment> {
             }
               setState(() {
         _paymentPending = tempData;
+        print("----------------------------------");
+        print(_paymentPending);
+
+        print("abc");
         isLoading = false;
       });
       });
     
     });
   }
-
-  markPaid(String Id){
+userdebit(String Id,int creditAmount){
+  FirebaseFirestore.instance.collection("Users").doc(Id).update({"credit":creditAmount });
+}
+ 
+  markPaid(String Id ,int amount){
     setState(() {
       isLoading=true;
+       
+
     });
     Navigator.push(context,
           MaterialPageRoute(builder: ((context) => 
             AdminPageNavigation(tabNo: 3))));
 
-  FirebaseFirestore.instance.collection("Tasks").doc(Id).update({"paid":true}).then((value) => 
-   getUserTasks()
+  FirebaseFirestore.instance.collection("Tasks").doc(Id).update({"paid":true}).then((value){userdebit(Id, amount); getUserTasks();}
+   
   
   );
 }
@@ -107,38 +122,37 @@ class _userTasksState extends State<UserTaskPayment> {
         child: ListView.builder(
             itemCount: _paymentPending.length,
             itemBuilder: (BuildContext context, int index) {
-              return Container(
-                margin: EdgeInsets.all(5),
-                height: MediaQuery.sizeOf(context).height*0.12,
-               
-                decoration: BoxDecoration( color: Colors.white,
-                border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10)),
-                child:
-              
-               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                 children: [ 
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+              return InkWell(
+                onTap: (){
+                  showDialog(context: context, builder: (context)=>  taskDialouge(index));
+                },
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  height: MediaQuery.sizeOf(context).height*0.08,
+                 
+                  decoration: BoxDecoration( color: Colors.white,
+                  border: Border.all(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10)),
+                  child:
+                
+                 Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                                        children: [
-                         Text("${_paymentPending[index]["userName"]}"),
-                         
-                         Text( "${_paymentPending[index]["Title"]}")
-                                ],),
-                    ),
-               
-                              Column
-                              (
-                              children: [
-                              TextButton(onPressed: (){
-                             markPaid("${_paymentPending[index]["id"]}");
-                              }, child: Text("Paid")),
-                               TextButton(onPressed: (){
-                                markDefault("${_paymentPending[index]["id"]}");
-                               }, child: Text("Deafaulted"))],)],),);
+                           Text("${_paymentPending[index]["userName"]}"),
+                           
+                           Text( "${_paymentPending[index]["Title"]}")]
+                      
+                  // Column
+                  //               (
+                  //               children: [
+                  //               TextButtcon(onPressed: (){
+                  //              markPaid("${_paymentPending[index]["id"]}");
+                  //               }, child: Text("Paid")),
+                  //                TextButton(onPressed: (){
+                  //                 markDefault("${_paymentPending[index]["id"]}");
+                  //                }, child: Text("Deafaulted"))],)],
+                               
+                                 ),),
+              );
               // ElevatedButton(
               //     onPressed: () {},
               //     child: 
@@ -146,9 +160,33 @@ class _userTasksState extends State<UserTaskPayment> {
               // ${_paymentPending[index]["Title"]}"));
             
             }),
-      ), 
+      ),
+       
     );
+    
   }
+  Widget taskDialouge(int index){
+return   Dialog(child: Container(color: Colors.white,
+      child: Column(mainAxisSize: MainAxisSize.min,children: [
+       Icon(Icons.warning,size: 44,color: Colors.red,
+       ),
+       Text("Are you sure to want?"),
+         Text("${_paymentPending[index]["userName"]}"),
+       Row( mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+     TextButton(onPressed: (){
+                               markPaid("${_paymentPending[index]["id"]}" ,12);
+                             //  (int.parse("${_paymentPending[index]["amountToBePaid"].toString()}")+int.parse("${_paymentPending[index]["credit"].toString()}")));
+                                }, child: Text("Paid")),
+                                  TextButton(onPressed: (){
+                            markDefault("${_paymentPending[index]["id"]}");
+                                }, child: Text("Defaulted")),
+
+       ],)
+
+        ],),),);
+  
+}
 }
 
 Widget taskCard(context, String title) {
