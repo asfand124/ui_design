@@ -81,7 +81,7 @@ class _userTasksState extends State<UserTaskPayment> {
     });
   }
 userdebit(String Id,int creditAmount){
-  FirebaseFirestore.instance.collection("Users").doc(Id).update({"credit":creditAmount });
+  FirebaseFirestore.instance.collection("Users").doc(Id).update({"credit":FieldValue.increment(creditAmount) });
 }
  
   markPaid(String Id ,int amount){
@@ -173,7 +173,7 @@ return   Dialog(child: Container(color: Colors.white,
        Text("Are you sure to want?"),
          Text("${_paymentPending[index]["userName"]}"),
        Row( mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
+        children: [ 
      TextButton(onPressed: (){
                                markPaid("${_paymentPending[index]["id"]}" ,12);
                              //  (int.parse("${_paymentPending[index]["amountToBePaid"].toString()}")+int.parse("${_paymentPending[index]["credit"].toString()}")));
